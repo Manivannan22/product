@@ -1,0 +1,20 @@
+.star-rating {
+    font-size: 0;
+    background-color: rgb(113, 240, 113);
+    width: 100%;
+    height: 5vh;
+  }
+  
+  .star {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1.5rem;
+    color: #fff;
+  }
+  
+  .star-filled {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1.5rem;
+    color: gold;
+  }
