@@ -1,8 +1,22 @@
+import * as React from "react"
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
+import { ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 import { Badge} from "@/components/ui/badge";
+import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@radix-ui/react-navigation-menu";
+import { Icons } from "@/components/icons";
+// import { Icons } from "@/components/icons";
+// import {
+//     NavigationMenu,
+//     NavigationMenuContent,
+//     NavigationMenuItem,
+//     NavigationMenuLink,
+//     NavigationMenuList,
+//     NavigationMenuTrigger,
+//     navigationMenuTriggerStyle,
+//   } from "@/components/ui/navigation-menu"
+// import { cn } from "@/lib/utils";
 // import { Link } from "react-router-dom"
 
 
@@ -41,11 +55,115 @@ const Front = () => {
         },
     ]
 
+    const components: { title: string; href: string; description: string }[] = [
+        {
+          title: "Alert Dialog",
+          href: "/docs/primitives/alert-dialog",
+          description:
+            "A modal dialog that interrupts the user with important content and expects a response.",
+        },
+        {
+          title: "Hover Card",
+          href: "/docs/primitives/hover-card",
+          description:
+            "For sighted users to preview content available behind a link.",
+        },
+        {
+          title: "Progress",
+          href: "/docs/primitives/progress",
+          description:
+            "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+        },
+        {
+          title: "Scroll-area",
+          href: "/docs/primitives/scroll-area",
+          description: "Visually or semantically separates content.",
+        },
+        {
+          title: "Tabs",
+          href: "/docs/primitives/tabs",
+          description:
+            "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+        },
+        {
+          title: "Tooltip",
+          href: "/docs/primitives/tooltip",
+          description:
+            "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
+        },
+      ]
+
     return (
+        
+    <div>
         <div>
-            <div >
-                <div >
-         <ResizablePanelGroup
+        <NavigationMenu>
+      <NavigationMenuList>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
+          <NavigationMenuTrigger>Components</NavigationMenuTrigger>
+          <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+              <li className="row-span-3">
+                <NavigationMenuLink asChild>
+                  <a
+                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                    href="/"
+                  >
+                    {/* <Icons.logo className="h-6 w-6" /> */}
+                    <div className="mb-2 mt-4 text-lg font-medium">
+                      shadcn/ui
+                    </div>
+                    <p className="text-sm leading-tight text-muted-foreground">
+                      Beautifully designed components that you can copy and
+                      paste into your apps. Accessible. Customizable. Open
+                      Source.
+                    </p>
+                  </a>
+                </NavigationMenuLink>
+              </li>
+              {/* <ListItem href="/docs" title="Introduction">
+                Re-usable components built using Radix UI and Tailwind CSS.
+              </ListItem>
+              <ListItem href="/docs/installation" title="Installation">
+                How to install dependencies and structure your app.
+              </ListItem>
+              <ListItem href="/docs/primitives/typography" title="Typography">
+                Styles for headings, paragraphs, lists...etc
+              </ListItem> */}
+            </ul>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger>Components</NavigationMenuTrigger>
+          <NavigationMenuContent>
+            {/* <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+              {components.map((component) => (
+                <ListItem
+                  key={component.title}
+                  title={component.title}
+                  href={component.href}
+                >
+                  {component.description}
+                </ListItem>
+              ))}
+            </ul> */}
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          {/* <Link href="/docs" legacyBehavior passHref>
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              Documentation
+            </NavigationMenuLink>
+          </Link> */}
+        </NavigationMenuItem>
+      </NavigationMenuList>
+    </NavigationMenu>
+    </div>
+    <div>
+    <div>
+    <ResizablePanelGroup
       direction="horizontal"
       className="w-auto rounded-lg border mt-1">
         {/* <Card className="w-60">  */}
@@ -72,33 +190,25 @@ const Front = () => {
       </CarouselContent>
       <CarouselPrevious />
       <CarouselNext />
-        </Carousel>
-       
-
+      </Carousel>
         <div className="flex justify-center ">
           <img className="object-cover" src="https://rukminim2.flixcart.com/image/416/416/xif0q/usb-gadget/f/m/u/-original-imagppnd3hkuv6k4.jpeg?q=70&crop=false" />
         </div>
         </div>
         <div className="flex justify-center mt-4">
-            <Button className="bg-orange-400 hover:bg-orange-700">ADD TO CART</Button>
-            <Button className="ml-2 bg-gray-400 hover:bg-gray-700">BUY NOW</Button>
+          <Button className="bg-orange-400 hover:bg-orange-700">ADD TO CART</Button>
+          <Button className="ml-2 bg-gray-400 hover:bg-gray-700">BUY NOW</Button>
         </div>
-        
-       
-        
-      </ResizablePanel>
-      {/* </Card> */}
-      {/* <ResizableHandle /> */}
-      <ResizablePanel defaultSize={60}>
+        </ResizablePanel>
+
+        <ResizablePanel defaultSize={60}>
         <ResizablePanelGroup direction="vertical">
-          {/* <ResizableHandle /> */}
-          <ResizablePanel defaultSize={75}> 
-            {/* <Card> */}
-    <CardTitle className="mt-6 ml-2 font-normal">Portable 4-Port USB 3.0 HUB (Black)</CardTitle> 
-      <CardContent>
+          
+        <div className="overflow-y-scroll h-96">
+        <CardTitle className="mt-6 ml-6 font-normal">Portable 4-Port USB 3.0 HUB (Black)</CardTitle> 
+        <CardContent className="overscroll-y-auto">
         <form>
-          <div className="grid w-full items-center gap-8">
-            <div>
+          <div className="grid  w-full items-center gap-8">
               <div className="text-wrap mt-2">
               <div className="flex gap-3 text-gray-500"> 
               <Badge className="bg-green-400 w-8 justify-center">4.5
@@ -119,22 +229,27 @@ const Front = () => {
               </div>
               <div className="mt-4">
                <text className="font-bold"><h2>Available  Offers</h2>
-               <li className="text-black-400 mt-2 font-light"><span className="font-bold">Bank Offer</span>10% off on Canara Bank Credit Card Transactions, up to ₹1,500 on orders of ₹5,000 and above <p className="text-blue-400">T&C</p></li>
-               <li className="text-black-400 mt-2 font-light"><span className="font-bold">Bank Offer</span>Flat ₹1,000 off on OneCard Credit Card and Credit EMI Transactions on orders of ₹10,000 and above <p className="text-blue-400">T&C</p></li>
-               <li className="text-black-400 mt-2 font-light"><span className="font-bold">Bank Offer</span>8% off on Yes Bank Credit Card EMI Transactions, up to ₹2,000 on orders of ₹10,000 and above <p className="text-blue-400">T&C</p></li>
-               <li className="text-black-400 mt-2 font-light">Buy for 100 get ₹225 off your Next Buy <p className="text-blue-400">T&C</p></li>
+               <li className="text-black-400 mt-2 font-light"><span className="font-bold">Bank Offer</span>10% off on Canara Bank Credit Card Transactions, up to ₹1,500 on orders of ₹5,000 and above <span className="text-blue-400">T&C</span></li>
+               <li className="text-black-400 mt-2 font-light"><span className="font-bold">Bank Offer</span>Flat ₹1,000 off on OneCard Credit Card and Credit EMI Transactions on orders of ₹10,000 and above <span className="text-blue-400">T&C</span></li>
+               <li className="text-black-400 mt-2 font-light"><span className="font-bold">Bank Offer</span>8% off on Yes Bank Credit Card EMI Transactions, up to ₹2,000 on orders of ₹10,000 and above <span className="text-blue-400">T&C</span></li>
+               <li className="text-black-400 mt-2 font-light">Buy for 100 get ₹225 off your Next Buy <span className="text-blue-400">T&C</span></li>
+               <li className="text-black-400 mt-2 font-light"><span className="font-bold">Bank Offer</span>8% off on Yes Bank Credit Card EMI Transactions, up to ₹2,000 on orders of ₹10,000 and above <span className="text-blue-400">T&C</span></li>
+               <li className="text-black-400 mt-2 font-light"><span className="font-bold">Bank Offer</span>8% off on Yes Bank Credit Card EMI Transactions, up to ₹2,000 on orders of ₹10,000 and above <span className="text-blue-400">T&C</span></li>
+               <li className="text-black-400 mt-2 font-light"><span className="font-bold">Bank Offer</span>8% off on Yes Bank Credit Card EMI Transactions, up to ₹2,000 on orders of ₹10,000 and above <span className="text-blue-400">T&C</span></li>
+               <li className="text-black-400 mt-2 font-light"><span className="font-bold">Bank Offer</span>8% off on Yes Bank Credit Card EMI Transactions, up to ₹2,000 on orders of ₹10,000 and above <span className="text-blue-400">T&C</span></li>
+               <li className="text-black-400 mt-2 font-light"><span className="font-bold">Bank Offer</span>8% off on Yes Bank Credit Card EMI Transactions, up to ₹2,000 on orders of ₹10,000 and above <span className="text-blue-400">T&C</span></li>
+               <li className="text-black-400 mt-2 font-light"><span className="font-bold">Bank Offer</span>8% off on Yes Bank Credit Card EMI Transactions, up to ₹2,000 on orders of ₹10,000 and above <span className="text-blue-400">T&C</span></li>
+               <li className="text-black-400 mt-2 font-light"><span className="font-bold">Bank Offer</span>8% off on Yes Bank Credit Card EMI Transactions, up to ₹2,000 on orders of ₹10,000 and above <span className="text-blue-400">T&C</span></li>
+               <li className="text-black-400 mt-2 font-light"><span className="font-bold">Bank Offer</span>8% off on Yes Bank Credit Card EMI Transactions, up to ₹2,000 on orders of ₹10,000 and above <span className="text-blue-400">T&C</span></li>
+               <li className="text-black-400 mt-2 font-light"><span className="font-bold">Bank Offer</span>8% off on Yes Bank Credit Card EMI Transactions, up to ₹2,000 on orders of ₹10,000 and above <span className="text-blue-400">T&C</span></li>
+               
                </text>
               </div>
               </div>
-            </div>
           </div>
         </form>
       </CardContent>
-      {/* <CardFooter className="flex justify-between">
-      <Link to="about" className=" hover:bg-gray-200 w-12 text-center text-blue-500 rounded-md">View</Link>
-      </CardFooter> */}
-    {/* </Card> */}
-          </ResizablePanel>
+      </div>
         </ResizablePanelGroup>
       </ResizablePanel>
     </ResizablePanelGroup>
@@ -150,7 +265,7 @@ const Front = () => {
       className="w-8/12 ml-24"
     >
     <CarouselContent>
-     {productArray.map((item, index) => {
+     {productArray.map((item: { url: string | undefined; }, index: React.Key | null | undefined) => {
         return <CarouselItem key={index} className="md:basis-1/6 lg:basis-1/3">
         <div className="p-1">
         <Card>
