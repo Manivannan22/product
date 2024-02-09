@@ -5,7 +5,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 import { Badge} from "@/components/ui/badge";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@radix-ui/react-navigation-menu";
-import { Icons } from "@/components/icons";
+// import { Icons } from "@/components/icons";
 // import { Icons } from "@/components/icons";
 // import {
 //     NavigationMenu,
@@ -24,85 +24,59 @@ const Front = () => {
 
     const productArray = [
         {
-            title: "Camera",
-            desc: "",
+            name: "Camera",
+            prise: "",
+            rating: "",
+            desc: "camera",
             url: "https://rukminim2.flixcart.com/image/416/416/xif0q/camera-bag/tote/d/t/i/gcra100-cospex-original-imagppk5zjzpychh.jpeg?q=70&crop=false"
         },
         {
-            title: "USB Hub",
-            desc: "",
+            name: "USB Hub",
+            prise: "",
+            rating: "",
+            desc: "usb hub",
             url: "https://rukminim2.flixcart.com/image/416/416/koad9jk0/usb-gadget/x/h/w/100hb-zebronics-original-imaf8r2gbb3rzqfh.jpeg?q=70&crop"
         },
         {
-            title: " portable USB Hub",
+            name: " portable USB Hub",
+            prise: "",
+            rating: "",
             desc: "Portable Cable, ",
             url: "https://rukminim2.flixcart.com/image/416/416/xif0q/usb-gadget/f/m/u/-original-imagppnd3hkuv6k4.jpeg?q=70&crop=false"
         },
         {
-            title: "Samsung G-s21",
-            desc: "",
+            name: "Samsung G-s21",
+            prise: "",
+            rating: "",
+            desc: "samsung mobile",
             url: "https://rukminim2.flixcart.com/image/416/416/xif0q/mobile/a/y/g/-original-imagtnqkutcyzhgq.jpeg?q=70&crop=false"
         },
         {
-            title: "LG - AC",
-            desc: "",
+            name: "LG - AC",
+            prise: "",
+            rating: "",
+            desc: "lg",
             url: "https://rukminim2.flixcart.com/image/416/416/xif0q/air-conditioner-new/o/c/n/-original-imagmptfzaejnzwd.jpeg?q=70&crop=false"
         },
         {
-            title: "Dell - Alienware",
-            desc: "",
+            name: "Dell - Alienware",
+            prise: "",
+            rating: "",
+            desc: "dell",
             url: "https://www.flipkart.com/dell-alienware-intel-core-i9-12th-gen-12900h-32-gb-1-tb-hdd-1-ssd-windows-11-home-8-gb-graphics-nvidia-geforce-rtx-3070-ti-360-hz-x15-r2-gaming-laptop/p/itm955f07d54a6c6?pid=COMGMZF39HRSYE7Q&lid=LSTCOMGMZF39HRSYE7Q8GMVC3&marketplace=FLIPKART&fm=neo%2Fmerchandising&iid=M_7420753c-307a-433b-a8dc-ff98e057ec74_9_W08FB4AVY13Q_MC.COMGMZF39HRSYE7Q&ppt=browse&ppn=browse&otracker=clp_pmu_v2_Dell%2BGaming%2BLaptops_2_9.productCard.PMU_V2_DELL%2BAlienware%2BIntel%2BCore%2Bi9%2B12th%2BGen%2B12900H%2B-%2B%252832%2BGB%252F1%2BTB%2BHDD%252F1%2BTB%2BSSD%252FWindows%2B11%2BHome%252F8%2BGB%2BGraphics%252FNVIDIA%2BGeForce%2BRTX%2B3070%2BTi%252F360%2BHz%2529%2BAlienware%2Bx15%2BR2%2BGaming%2BLaptop_gaming-laptops-store_COMGMZF39HRSYE7Q_neo%2Fmerchandising_1&otracker1=clp_pmu_v2_PINNED_neo%2Fmerchandising_Dell%2BGaming%2BLaptops_LIST_productCard_cc_2_NA_view-all&cid=COMGMZF39HRSYE7Q"
         },
     ]
-
-    const components: { title: string; href: string; description: string }[] = [
-        {
-          title: "Alert Dialog",
-          href: "/docs/primitives/alert-dialog",
-          description:
-            "A modal dialog that interrupts the user with important content and expects a response.",
-        },
-        {
-          title: "Hover Card",
-          href: "/docs/primitives/hover-card",
-          description:
-            "For sighted users to preview content available behind a link.",
-        },
-        {
-          title: "Progress",
-          href: "/docs/primitives/progress",
-          description:
-            "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
-        },
-        {
-          title: "Scroll-area",
-          href: "/docs/primitives/scroll-area",
-          description: "Visually or semantically separates content.",
-        },
-        {
-          title: "Tabs",
-          href: "/docs/primitives/tabs",
-          description:
-            "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
-        },
-        {
-          title: "Tooltip",
-          href: "/docs/primitives/tooltip",
-          description:
-            "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
-        },
-      ]
-
+    
     return (
         
     <div>
         <div>
         <NavigationMenu>
       <NavigationMenuList>
-        <NavigationMenuItem>
+        <NavigationMenuItem className="flex justify-center">
           <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
-          <NavigationMenuTrigger>Components</NavigationMenuTrigger>
-          <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
+          {/* <NavigationMenuTrigger>Components</NavigationMenuTrigger>
+          <NavigationMenuTrigger>Getting started</NavigationMenuTrigger> */}
           <NavigationMenuContent>
             <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">
@@ -136,7 +110,7 @@ const Front = () => {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Components</NavigationMenuTrigger>
+          {/* <NavigationMenuTrigger>Components</NavigationMenuTrigger> */}
           <NavigationMenuContent>
             {/* <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
               {components.map((component) => (
