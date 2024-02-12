@@ -9,6 +9,10 @@ export const siteConfig = {
       title: "Home",
       href: "/",
     },
+    {
+      title: "Add Products",
+      href: "/addProduct",
+    },
   ],
   links: {
     youtube: "https://youtube.com/@m6io",

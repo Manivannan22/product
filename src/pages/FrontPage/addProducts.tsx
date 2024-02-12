@@ -1,21 +1,119 @@
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import React from "react"
+import { useFormik } from "formik"
+import * as Yup from "yup"
+import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
 const AddProduct = () => {
-  return (
-    <div className="" >
-    <div className="grid w-full max-w-sm items-center gap-1.5">
-      <Label htmlFor="name">Name</Label>
-      <Input type="name" id="name" placeholder="Name" />
-      <Label htmlFor="prise">prise</Label>
-      <Input type="prise" id="prise" placeholder="Prise" />
-      <Label htmlFor="quntity">quentity</Label>
-      <Input type="quntity" id="quntity" placeholder="Quentity" />
-      <Label htmlFor="description">description</Label>
-      <Input type="description" id="description" placeholder="Description" />
-    </div>
-    </div>
-  )
+  const navigate = useNavigate()
+	const formik = useFormik({
+		initialValues: {
+			name: "",
+			price: "",
+			quantity: "",
+			description: "",
+			category: "",
+		},
+		// validationSchema: Yup.object({
+		// 	firstName: Yup.string()
+		// 		.max(15, "Must be 15 characters or less")
+		// 		.required("Required"),
+		// 	lastName: Yup.string()
+		// 		.max(20, "Must be 20 characters or less")
+		// 		.required("Required"),
+		// 	email: Yup.string().email("Invalid email address").required("Required"),
+		// }),
+		onSubmit: async (values) => {
+			await axios
+				.post("http://localhost:5000/api/create_product", values)
+				.then((res) => {
+          console.log(res);
+          navigate("/")
+        })
+				.catch((err) => {
+          console.log(err);
+        })
+		},
+	})
+	return (
+		<div className="mt-10 flex justify-center">
+			<div className="grid w-full max-w-sm items-center gap-1.5">
+				<form onSubmit={formik.handleSubmit}>
+					<label>Product Name</label>
+					<input
+						id="name"
+						name="name"
+						type="text"
+						className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+						onChange={formik.handleChange}
+						onBlur={formik.handleBlur}
+						value={formik.values.name}
+					/>
+					{formik.touched.name && formik.errors.name ? (
+						<div>{formik.errors.name}</div>
+					) : null}
+
+					<label>Price</label>
+					<input
+						id="price"
+						name="price"
+						type="number"
+						className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+						onChange={formik.handleChange}
+						onBlur={formik.handleBlur}
+						value={formik.values.price}
+					/>
+					{formik.touched.price && formik.errors.price ? (
+						<div>{formik.errors.price}</div>
+					) : null}
+
+					<label>Quantity</label>
+					<input
+						id="quantity"
+						name="quantity"
+						type="number"
+						className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+						onChange={formik.handleChange}
+						onBlur={formik.handleBlur}
+						value={formik.values.quantity}
+					/>
+					{formik.touched.quantity && formik.errors.quantity ? (
+						<div>{formik.errors.quantity}</div>
+					) : null}
+
+					<label>Description</label>
+					<input
+						id="description"
+						name="description"
+						type="text"
+						onChange={formik.handleChange}
+						onBlur={formik.handleBlur}
+						value={formik.values.description}
+						className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+					/>
+					{formik.touched.description && formik.errors.description ? (
+						<div>{formik.errors.description}</div>
+					) : null}
+
+					<label>Category</label>
+					<input
+						id="category"
+						name="category"
+						className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+						type="text"
+						onChange={formik.handleChange}
+						onBlur={formik.handleBlur}
+						value={formik.values.category}
+					/>
+					{formik.touched.category && formik.errors.category ? (
+						<div>{formik.errors.category}</div>
+					) : null}
+
+					<button type="submit">Submit</button>
+				</form>
+			</div>
+		</div>
+	)
 }
 
 export default AddProduct
