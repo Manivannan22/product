@@ -1,6 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
 import { RadioGroup } from '@headlessui/react'
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
+import { Button } from '@/components/ui/button'
 
 const product = {
   name: 'Basic Tee 6-Pack',
@@ -12,7 +15,7 @@ const product = {
   ],
   images: [
     {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg',
+      src: 'https://rukminim2.flixcart.com/image/416/416/knyxqq80/dslr-camera/c/w/m/digital-camera-eos-m50-mark-ii-eos-m50-mark-ii-canon-original-imag2gzk7bhg55mh.jpeg?q=70&crop=false',
       alt: 'Two each of gray, white, and black shirts laying flat.',
     },
     {
@@ -32,6 +35,11 @@ const product = {
     { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
     { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
     { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
+    { name: 'red', class: ' bg-red-600', selectedClass: 'ring-red-800'},
+    { name: 'blue', class: ' bg-blue-700', selectedClass: 'ring-blue-800'},
+    { name: 'green', class: ' bg-green-700', selectedClass: 'ring-green-800'},
+    { name: 'yellow', class: ' bg-yellow-300', selectedClass: 'ring-yellow-300'},
+    
   ],
   sizes: [
     { name: 'XXS', inStock: false },
@@ -61,8 +69,28 @@ function classNames(...classes: string[]) {
 }
 
 export default function ProductDetails() {
+  const params = useParams()
+  console.log(params.id);
   const [selectedColor, setSelectedColor] = useState(product.colors[0])
   const [selectedSize, setSelectedSize] = useState(product.sizes[2])
+  const [productId, setProductId] = useState<any>([])
+
+  const handleClick = async() => {
+    await axios
+    .get(`http://localhost:5000/api/get_singleproduct?id=${params.id}`)
+    .then((res) => {
+      console.log(res);
+      setProductId(res?.data?.data);     
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+  
+  useEffect(() => {
+    handleClick()
+  },[])
+
 
   return (
     <div className="bg-white">
@@ -73,7 +101,7 @@ export default function ProductDetails() {
               <li key={breadcrumb.id}>
                 <div className="flex items-center">
                   <a href={breadcrumb.href} className="mr-2 text-sm font-medium text-gray-900">
-                    {breadcrumb.name}
+                    {product.name}
                   </a>
                   <svg
                     width={16}
@@ -96,11 +124,11 @@ export default function ProductDetails() {
           </ol>
         </nav>
 
-        {/* Image gallery */}
+        
         <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
           <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
             <img
-              src={product.images[0].src}
+              src={productId?.imageSrc}
               alt={product.images[0].alt}
               className="h-full w-full object-cover object-center"
             />
@@ -108,7 +136,7 @@ export default function ProductDetails() {
           <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
             <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
               <img
-                src={product.images[1].src}
+                src={productId?.imageSrc}
                 alt={product.images[1].alt}
                 className="h-full w-full object-cover object-center"
               />
@@ -123,7 +151,7 @@ export default function ProductDetails() {
           </div>
           <div className="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
             <img
-              src={product.images[3].src}
+              src={productId?.imageSrc}
               alt={product.images[3].alt}
               className="h-full w-full object-cover object-center"
             />
@@ -133,13 +161,13 @@ export default function ProductDetails() {
         {/* Product info */}
         <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
           <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-            <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{product.name}</h1>
+            <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{productId?.name}</h1>
           </div>
 
           {/* Options */}
           <div className="mt-4 lg:row-span-3 lg:mt-0">
             <h2 className="sr-only">Product information</h2>
-            <p className="text-3xl tracking-tight text-gray-900">{product.price}</p>
+            <p className="text-3xl tracking-tight text-gray-900">₹{productId?.price}</p>
 
             {/* Reviews */}
             <div className="mt-6">
@@ -150,16 +178,16 @@ export default function ProductDetails() {
                     <StarIcon
                       key={rating}
                       className={classNames(
-                        reviews.average > rating ? 'text-gray-900' : 'text-gray-200',
+                        4 > rating ? 'text-gray-900' : 'text-gray-200',
                         'h-5 w-5 flex-shrink-0'
                       )}
                       aria-hidden="true"
                     />
                   ))}
                 </div>
-                <p className="sr-only">{reviews.average} out of 5 stars</p>
+                <p className="sr-only">{2} out of 5 stars</p>
                 <a href={reviews.href} className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                  {reviews.totalCount} reviews
+                  {3.5} reviews
                 </a>
               </div>
             </div>
@@ -263,12 +291,21 @@ export default function ProductDetails() {
                 </RadioGroup>
               </div>
 
-              <button
+              <div className="mt-4 flex justify-around">
+								<Button className=" w-80 h-14 bg-orange-400 hover:bg-orange-700">
+									ADD TO CART
+								</Button>
+								<Button className="ml-2 w-80 h-14 bg-gray-400 hover:bg-gray-700">
+									BUY NOW
+								</Button>
+							</div>
+
+              {/* <button
                 type="submit"
                 className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
                 Add to bag
-              </button>
+              </button> */}
             </form>
           </div>
 

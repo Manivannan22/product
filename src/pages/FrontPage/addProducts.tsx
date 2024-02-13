@@ -3,6 +3,8 @@ import { useFormik } from "formik"
 import * as Yup from "yup"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import ImageUploader from 'react-images-upload';
+
 
 const AddProduct = () => {
   const navigate = useNavigate()
@@ -13,6 +15,7 @@ const AddProduct = () => {
 			quantity: "",
 			description: "",
 			category: "",
+			image_upload: "",
 		},
 		// validationSchema: Yup.object({
 		// 	firstName: Yup.string()
@@ -35,10 +38,13 @@ const AddProduct = () => {
         })
 		},
 	})
-	return (
+	return (  
 		<div className="mt-10 flex justify-center">
 			<div className="grid w-full max-w-sm items-center gap-1.5">
 				<form onSubmit={formik.handleSubmit}>
+					<div>
+					<h3 className="text mb-6 font-bold ">Add New Products</h3>
+					</div>
 					<label>Product Name</label>
 					<input
 						id="name"
@@ -109,7 +115,18 @@ const AddProduct = () => {
 						<div>{formik.errors.category}</div>
 					) : null}
 
-					<button type="submit">Submit</button>
+                    <label>Image Upload</label>
+					<input
+						id="image_upload"
+						name="image_upload"
+						className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+						type="file"
+						onChange={formik.handleChange}
+						onBlur={formik.handleBlur}
+						value={formik.values.image_upload}
+					/>
+
+					<button type="submit" className="  w-16 h-10 mt-8 rounded-lg bg-orange-300 hover:bg-orange-600" >Submit</button>
 				</form>
 			</div>
 		</div>
