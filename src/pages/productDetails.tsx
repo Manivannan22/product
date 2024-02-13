@@ -4,6 +4,7 @@ import { RadioGroup } from '@headlessui/react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { Button } from '@/components/ui/button'
+import AddToCart from './addToCart'
 
 const product = {
   name: 'Basic Tee 6-Pack',
@@ -70,10 +71,12 @@ function classNames(...classes: string[]) {
 
 export default function ProductDetails() {
   const params = useParams()
+  const [open, setOpen] = useState(false)
   console.log(params.id);
   const [selectedColor, setSelectedColor] = useState(product.colors[0])
   const [selectedSize, setSelectedSize] = useState(product.sizes[2])
   const [productId, setProductId] = useState<any>([])
+  const [cart, setCart] = useState<any>([])
 
   const handleClick = async() => {
     await axios
@@ -87,6 +90,11 @@ export default function ProductDetails() {
     })
   }
   
+  let addToCart = (item:any)=>{
+    setCart([...cart,item])
+  }
+
+
   useEffect(() => {
     handleClick()
   },[])
@@ -167,7 +175,7 @@ export default function ProductDetails() {
           {/* Options */}
           <div className="mt-4 lg:row-span-3 lg:mt-0">
             <h2 className="sr-only">Product information</h2>
-            <p className="text-3xl tracking-tight text-gray-900">₹{productId?.price}</p>
+            <p className="text-3xl tracking-tight text-gray-900">₹{product.price}</p>
 
             {/* Reviews */}
             <div className="mt-6">
@@ -292,10 +300,10 @@ export default function ProductDetails() {
               </div>
 
               <div className="mt-4 flex justify-around">
-								<Button className=" w-80 h-14 bg-orange-400 hover:bg-orange-700">
+								<Button type='button' onClick={()=>{addToCart(productId)}} className=" w-80 h-14 bg-orange-400 hover:bg-orange-700">
 									ADD TO CART
 								</Button>
-								<Button className="ml-2 w-80 h-14 bg-gray-400 hover:bg-gray-700">
+								<Button type='reset' onClick={()=>{setOpen(true)}} className="ml-2 w-80 h-14 bg-gray-400 hover:bg-gray-700">
 									BUY NOW
 								</Button>
 							</div>
@@ -308,6 +316,7 @@ export default function ProductDetails() {
               </button> */}
             </form>
           </div>
+
 
           <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
             {/* Description and details */}
@@ -343,6 +352,7 @@ export default function ProductDetails() {
           </div>
         </div>
       </div>
+      <AddToCart open={open} setOpen={setOpen}  cart={cart}/>
     </div>
   )
 }

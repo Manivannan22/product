@@ -1,7 +1,7 @@
 export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
-  name: "Vite",
+  name: "E-Com",
   description:
     "Beautifully designed components built with Radix UI and Tailwind CSS.",
   mainNav: [
@@ -15,8 +15,8 @@ export const siteConfig = {
     },
   ],
   links: {
-    youtube: "https://youtube.com/@m6io",
-    github: "https://github.com/m6io/shadcn-vite-template",
+    // youtube: "https://youtube.com/@m6io",
+    // github: "https://github.com/m6io/shadcn-vite-template",
     docs: "https://ui.shadcn.com",
   },
 }

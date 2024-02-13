@@ -4,6 +4,7 @@ import { ModeToggle } from "@/components/mode-toggle"
 import { buttonVariants } from "@/components/ui/button"
 import { siteConfig } from "@/config/site"
 import { Link } from "react-router-dom"
+import { FiShoppingBag } from "react-icons/fi";
 
 export function SiteHeader() {
   return (
@@ -12,7 +13,10 @@ export function SiteHeader() {
         <MainNav items={siteConfig.mainNav} />
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-1">
-            <Link to={siteConfig.links.github} target="_blank" rel="noreferrer">
+            <Link to="/addtocart">
+            <FiShoppingBag  className=" w-6 h-6 mr-4" />
+            </Link>
+            {/* <Link to={siteConfig.links.github} target="_blank" rel="noreferrer">
               <div
                 className={buttonVariants({
                   size: "icon",
@@ -37,7 +41,7 @@ export function SiteHeader() {
                 <Icons.youtube className="h-5 w-5" />
                 <span className="sr-only">YouTube</span>
               </div>
-            </Link>
+            </Link> */}
             <ModeToggle />
           </nav>
         </div>

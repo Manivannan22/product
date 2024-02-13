@@ -1,5 +1,5 @@
-import { useState, useEffect, Component } from "react"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader} from "@/components/ui/card"
+import { useState, useEffect } from "react"
+// import { Card, CardContent, CardDescription, CardFooter, CardHeader} from "@/components/ui/card"
 import './StarRating.css';
 import ProductDetailsPage from "./carousel";
 import axios from "axios";
