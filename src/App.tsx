@@ -13,6 +13,8 @@ import AddProduct from "./pages/FrontPage/addProducts"
 import HomePage from "../src/pages/FrontPage/first"
 import ProductDetailsPage from "./pages/FrontPage/carousel"
 import AddToCart from "./pages/addToCart"
+import Login from "./pages/Auth/login"
+import Signup from "./pages/Auth/signup"
 
 function App() {
 	return (
@@ -27,6 +29,9 @@ function App() {
 					<Route path="/:id" element={<ProductDetails />} />
 					<Route path="/addtocart" element={<AddToCart />} />
 					<Route path="/" element={<HomePage />} />
+					<Route path="/login" element={<Login />} />
+					<Route path="/signup" element={<Signup />} />
+
 					
 				</Routes>
 			</div>
