@@ -77,6 +77,7 @@ export default function ProductDetails() {
   const [selectedSize, setSelectedSize] = useState(product.sizes[2])
   const [productId, setProductId] = useState<any>([])
   const [cart, setCart] = useState<any>([])
+  const [notification, setNotification] = useState("")
 
   const handleClick = async() => {
     await axios
@@ -87,13 +88,14 @@ export default function ProductDetails() {
     })
     .catch((err) => {
       console.log(err);
+      setNotification("Failed to fetch product details. Please try again.")
     })
   }
   
-  let addToCart = (item:any)=>{
-    setCart([...cart,item])
-  }
-
+  const addToCart = (item:any)=>{
+    setCart([...cart,item]),
+    setNotification("Product added to cart successfully.")
+  } 
 
   useEffect(() => {
     handleClick()
@@ -298,6 +300,18 @@ export default function ProductDetails() {
                   </div>
                 </RadioGroup>
               </div>
+                            
+              {notification && (
+                <div className='fixed top-0 right-0 mt-4 mr-4 bg-green-500 text-white px-4 py-2 rounded'>
+                   {notification}
+                   <button 
+                    onClick={() => setNotification(productId)}
+                    className='ml-2 text-sm font-medium hover:underline'
+                   >
+                    Dismiss
+                   </button>
+                </div>   
+              )}       
 
               <div className="mt-4 flex justify-around">
 								<Button type='button' onClick={()=>{addToCart(productId)}} className=" w-80 h-14 bg-orange-400 hover:bg-orange-700">
@@ -307,13 +321,6 @@ export default function ProductDetails() {
 									BUY NOW
 								</Button>
 							</div>
-
-              {/* <button
-                type="submit"
-                className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-              >
-                Add to bag
-              </button> */}
             </form>
           </div>
 
@@ -352,7 +359,7 @@ export default function ProductDetails() {
           </div>
         </div>
       </div>
-      <AddToCart open={open} setOpen={setOpen}  cart={cart}/>
+      <AddToCart open={open} setOpen={setOpen} setCart={setCart} cart={cart}/>
     </div>
   )
 }
