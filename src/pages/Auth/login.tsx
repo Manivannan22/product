@@ -1,9 +1,7 @@
-import { siteConfig } from "@/config/site";
 import axios from "axios";
 import { useFormik } from "formik";
-import { Link } from "lucide-react";
-import React from "react"
 import { FiShoppingCart } from "react-icons/fi";
+import { toast } from "sonner";
 import * as Yup from 'yup';
 
 
@@ -14,10 +12,11 @@ const Login = () => {
         .post(`http://localhost:5000/api/log_in`, val)
         .then((res) => {
           console.log(res);    
-          formik.resetForm()
+          formik.resetForm();
+          toast.success("Login sucessful")
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
         })
       }
 
@@ -35,7 +34,7 @@ const Login = () => {
             if (values?.email) {
                 handleClick(values)
              }else{
-                alert("error")
+                toast.error("error")
              }
         },
       });
@@ -69,7 +68,7 @@ const Login = () => {
                   />
                   {formik.touched.email && formik.errors.email ? (
                   <div>{formik.errors.email}</div>
-                  ) : null}
+                  ) : null} 
                 </div>
               </div>
   
@@ -94,24 +93,26 @@ const Login = () => {
                   ) : null}
                 </div>
                 <div className="text-sm">
-                    <a href="#" className="flex justify-end mt-2 font-semibold text-indigo-600 hover:text-indigo-500">
+                    <a href="/forgotPassword" className="flex justify-end mt-2 font-semibold text-gray-600 hover:text-black">
                       Forgot password?
                     </a>
                   </div>
               </div>
   
               <div>
+                
                 <button
                   type="submit"
-                  className="flex w-full justify-center mt-2 rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="flex w-full justify-center mt-2 rounded-md bg-gray-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                 >
                   Log in
                 </button>
+                
               </div>
   
             <p className="mt-10 text-center text-sm text-gray-500">
               Not a member?
-              <a href="/login" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+              <a href="/signup" className="font-semibold leading-6 text-gray-600 hover:text-black">
                signup
               </a>
             </p>

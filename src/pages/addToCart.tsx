@@ -4,7 +4,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline"
 import _ from "lodash"
 
 const AddToCart = ({ product, open, setOpen, cart, setCart }: any) => {
-	const [notification, setNotification] = useState("")
+  const [notification, setNotification] = useState("")
    
   const addToCart = (productToadd: any) => {
    const isProductInCart = cart.find((item: any) => item._id === productToadd._id);
@@ -15,7 +15,6 @@ const AddToCart = ({ product, open, setOpen, cart, setCart }: any) => {
       setNotification("Product add to cart")
    }
   }
-
 
 
 	const increaseQuantity = (productId: any, sign: any) => {

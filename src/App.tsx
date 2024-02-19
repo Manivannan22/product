@@ -14,10 +14,12 @@ import ProductDetailsPage from "./pages/FrontPage/carousel"
 import AddToCart from "./pages/addToCart"
 import Login from "./pages/Auth/login"
 import Signup from "./pages/Auth/signup"
+import ForgotPassword from "./pages/Auth/forgotPassword"
 
 function App() {
 	return (
 		<>
+	
 			<div className="relative flex min-h-screen flex-col">
 				<SiteHeader />
 				<Routes>
@@ -30,8 +32,7 @@ function App() {
 					<Route path="/home" element={<HomePage />} />
 					<Route path="/" element={<Login />} />
 					<Route path="/signup" element={<Signup />} />
-
-					
+                    <Route path="/forgotPassword" element={< ForgotPassword/>} />
 				</Routes>
 			</div>
 		</>

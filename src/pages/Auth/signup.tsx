@@ -1,14 +1,10 @@
-import { siteConfig } from "@/config/site";
 import axios from "axios";
 import { useFormik } from "formik";
-import React, { useEffect, useState } from "react"
 import { FiShoppingCart } from "react-icons/fi";
-import { Link, useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
 
 
 const Signup = () => {
-const navigate = useNavigate()
 
 const handleClick = async(val:any) => {
     await axios
@@ -134,7 +130,7 @@ const handleClick = async(val:any) => {
                   />
                 </div>
                 <div className="text-sm">
-                    <a href="#" className="flex justify-end mt-2 font-semibold text-indigo-600 hover:text-indigo-500">
+                    <a href="#" className="flex justify-end mt-2 font-semibold text-gray-600 hover:text-black">
                       Forgot password?
                     </a>
                   </div>
@@ -143,7 +139,7 @@ const handleClick = async(val:any) => {
               <div>
                 <button
                   type="submit"
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="flex w-full justify-center rounded-md bg-gray-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                 >
                   Sign up
                 </button>
@@ -152,7 +148,7 @@ const handleClick = async(val:any) => {
   
             <p className="mt-10 text-center text-sm text-gray-500">
               Not a member?
-              <a href="/sign_up" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+              <a href="/" className="font-semibold leading-6 text-gray-600 hover:text-black">
                Login
               </a>
             </p>
@@ -164,7 +160,7 @@ const handleClick = async(val:any) => {
 
   export default Signup
 
-function setErrorMessage(arg0: string) {
-    throw new Error("Function not implemented.");
-}
+// function setErrorMessage(arg0: string) {
+//     throw new Error("Function not implemented.");
+// }
   
