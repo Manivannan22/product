@@ -1,11 +1,14 @@
 import axios from "axios";
 import { useFormik } from "formik";
 import { FiShoppingCart } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import * as Yup from 'yup';
 
 
 const Login = () => {
+  const navigate = useNavigate();
+
 
     const handleClick = async(val:any) => {
         await axios
@@ -13,6 +16,7 @@ const Login = () => {
         .then((res) => {
           console.log(res);    
           formik.resetForm();
+          navigate('/home')
           toast.success("Login sucessful")
         })
         .catch((err) => {
@@ -116,6 +120,7 @@ const Login = () => {
                signup
               </a>
             </p>
+            
           </div>
          </form>
         </div>

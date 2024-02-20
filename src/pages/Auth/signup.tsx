@@ -129,17 +129,17 @@ const handleClick = async(val:any) => {
                     className=" ml-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
-                <div className="text-sm">
+                {/* <div className="text-sm">
                     <a href="#" className="flex justify-end mt-2 font-semibold text-gray-600 hover:text-black">
                       Forgot password?
                     </a>
-                  </div>
+                  </div> */}
               </div>
   
               <div>
                 <button
                   type="submit"
-                  className="flex w-full justify-center rounded-md bg-gray-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                  className="flex w-full mt-5 justify-center rounded-md bg-gray-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                 >
                   Sign up
                 </button>
