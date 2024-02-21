@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { Button } from '@/components/ui/button'
 import AddToCart from './addToCart'
+import Cart from '@/assets/cart.png'
 
 const product = {
   name: 'Basic Tee 6-Pack',
@@ -96,6 +97,14 @@ export default function ProductDetails() {
     setCart([...cart,item]),
     setNotification("Product added to cart successfully.")
   } 
+
+  const CalculateTotalAmount = () => {
+    let totalAmount = 0;
+    cart.forEach((product: any) => {
+      totalAmount += product.price;
+    });
+    return totalAmount;
+  }
 
   useEffect(() => {
     handleClick()
@@ -315,7 +324,8 @@ export default function ProductDetails() {
 
               <div className="mt-4 flex justify-around">
 								<Button type='button' onClick={()=>{addToCart(productId)}} className=" w-80 h-14 bg-orange-400 hover:bg-orange-700">
-									ADD TO CART
+									<img src={Cart} className=" h-5 mr-2" />
+                  ADD TO CART
 								</Button>
 								<Button type='reset' onClick={()=>{setOpen(true)}} className="ml-2 w-80 h-14 bg-gray-400 hover:bg-gray-700">
 									BUY NOW
@@ -358,6 +368,11 @@ export default function ProductDetails() {
             </div>
           </div>
         </div>
+        {/* <div className="mt-4 flex justify-center">
+        <p className="text-lg font-semibold">
+          Total Amount: ₹{CalculateTotalAmount()}
+        </p>
+      </div> */}
       </div>
       <AddToCart open={open} setOpen={setOpen} setCart={setCart} cart={cart}/>
     </div>

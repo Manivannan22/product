@@ -1,12 +1,14 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { toast, useToast } from "@/components/ui/use-toast"
+import { useToast } from "@/components/ui/use-toast"
 import axios from "axios"
 import { useFormik } from "formik"
 import { useRef, useState } from "react"
+import { redirect, useNavigate } from "react-router-dom"
+import { toast } from "sonner"
 import * as Yup from "yup"
 
-const [emailID, setEmailID]=useState("")
+let emailID = ""
 
 const forgotPasswordSchema = Yup.object().shape({
 	email: Yup.string()
@@ -14,43 +16,47 @@ const forgotPasswordSchema = Yup.object().shape({
 		.required("Email is required"),
 })
 
-export function ForgotPasswordForm({setStep}:any) {
-  const [error, setError] = useState<string | null>(null);
-  const [email, setEmail] = useState();
-  const [otp, setOtp] = useState();
-  const [showModal, setShowModal] = useState(false);
-  const { toast } = useToast();
+const passwordschema = Yup.object().shape({
+	password: Yup.string().required("Password is required"),
+	confirmPassword: Yup.string()
+		.oneOf([Yup.ref("password")], "Passwords must match")
+		.required("Confirm Password is required"),
+})
+
+export function ForgotPasswordForm({ setStep }: { setStep: any }) {
+	const [error, setError] = useState<string | null>(null)
+	const [email, setEmail] = useState()
+	const [otp, setOtp] = useState()
+	const [showModal, setShowModal] = useState(false)
+	const { toast } = useToast()
 
 	const formik = useFormik({
 		initialValues: {
-			email: "", 
+			email: "",
 		},
 		validationSchema: forgotPasswordSchema,
 		onSubmit: async (values) => {
-            try {
-                console.log(values);
-                setEmailID(values?.email)
-                
-              const response = await axios.post(`http://localhost:5000/api/forgotPassword`, values);
-              console.log(response);
-              
-              setEmail(response.data.email);
-              setShowModal(true);
-              setStep(2);
-              toast({ 
-               variant: "default",
-               description: "send the email successful"})
-            } catch (error) {
-              console.error("Reset password");
-              setError("Reset email !")
-              toast({ description: "email address invalid"});
-            }
-          },
+			try {
+				console.log(values)
+				emailID = values?.email
+				const response = await axios.post(
+					`http://localhost:5000/api/forgotPassword`,
+					values,
+				)
+				setEmail(response.data.email)
+				setShowModal(true)
+				setStep(2)
+				toast({
+					variant: "default",
+					description: "send the email successful",
+				})
+			} catch (error) {
+				console.error("Reset password")
+				setError("Reset email !")
+				toast({ description: "email address invalid" })
+			}
+		},
 	})
-
-    const handleOtpSubmit = async () => {
-        const response = await axios.post('http://localhost:5000/api/VerifyPassword', { otp });
-    }
 
 	return (
 		<>
@@ -89,6 +95,7 @@ export function ForgotPasswordForm({setStep}:any) {
 							Send OTP
 						</Button>
 					</div>
+					{error && <div className="text-red-500">{error}</div>}
 				</div>
 			</div>
 		</>
@@ -96,9 +103,10 @@ export function ForgotPasswordForm({setStep}:any) {
 }
 
 export function OtpForm({ setStep }: any) {
+	const [error, setError] = useState<string | null>(null)
 	const formik = useFormik({
 		initialValues: Array.from({ length: 4 }, () => ""),
-		validate: (values) => {
+		validate: (values: any) => {
 			const errors = []
 			for (let i = 0; i < 4; i++) {
 				if (!values[i]) {
@@ -109,9 +117,24 @@ export function OtpForm({ setStep }: any) {
 			}
 			return errors
 		},
-		onSubmit: (values) => {
-			console.log("OTP submitted:", values?.map((v) => v).join(""))
-			setStep(3)
+		onSubmit: async (values: any) => {
+			let payload = {
+				enter_otp: values?.map((v: any) => v).join(""),
+				email: emailID,
+			}
+			try {
+				const response = await axios.post(
+					"http://localhost:5000/api/verify_password",
+					payload,
+				)
+				if (response?.data?.isPasOpen === true) {
+					toast.success(response?.data?.message)
+					setStep(3)
+				}
+			} catch (error: any) {
+				console.error("OTP verification error:", error)
+				toast.error(error.response.data.message)
+			}
 		},
 	})
 
@@ -143,11 +166,11 @@ export function OtpForm({ setStep }: any) {
 						type="text"
 						name={index.toString()}
 						maxLength={1}
-						value={formik.values[index]}
+						value={formik.values.otp}
 						onChange={(e) => handleInputChange(index, e.target.value)}
 						onBlur={formik.handleBlur}
 						className={`mx-2 h-9 w-9 border ${
-							formik.touched[index] && formik.errors[index]
+							formik.touched.otp && formik.errors.otp
 								? "border-red-500"
 								: "border-gray-300"
 						} rounded text-center focus:border-blue-500 focus:outline-none`}
@@ -164,26 +187,35 @@ export function OtpForm({ setStep }: any) {
 			>
 				Verify
 			</Button>
+			{error && <div className="text-red-500">{error}</div>}
 		</div>
 	)
 }
 
-const changePasswordSchema = Yup.object().shape({
-	password: Yup.string().required("Password is required"),
-	confirmPassword: Yup.string()
-		.oneOf([Yup.ref("password")], "Passwords must match")
-		.required("Confirm Password is required"),
-})
-
 export function ChangePassword() {
+	const navigate = useNavigate()
+	const [error, _setError] = useState<string | null>(null)
 	const formik = useFormik({
 		initialValues: {
 			password: "",
 			confirmPassword: "",
 		},
-		validationSchema: changePasswordSchema,
-		onSubmit: (values) => {
-			console.log("Form submitted with values:", {...values, email:emailID})
+		validationSchema: passwordschema,
+		onSubmit: async (values) => {
+			try {
+				const response = await axios.post(
+					"http://localhost:5000/api/reset_password",
+					{
+						email: emailID,
+						password: values.password,
+					},
+				)
+				toast.success(response?.data?.message)
+				navigate("/")
+			} catch (err: any) {
+				console.error("Password reset error:", error)
+				toast.error(err.response.data.message)
+			}
 		},
 	})
 
@@ -196,6 +228,7 @@ export function ChangePassword() {
 							id="password"
 							placeholder="Password"
 							name="password"
+							type="password"
 							value={formik?.values?.password}
 							onChange={formik?.handleChange}
 							onBlur={formik?.handleBlur}
@@ -216,6 +249,7 @@ export function ChangePassword() {
 							id="confirm password"
 							placeholder="Confirm Password"
 							name="confirmPassword"
+							type="password"
 							value={formik?.values?.confirmPassword}
 							onChange={formik?.handleChange}
 							onBlur={formik?.handleBlur}
@@ -240,19 +274,12 @@ export function ChangePassword() {
 								formik.handleSubmit()
 							}}
 						>
-							Chnage Password
+							Change Password
 						</Button>
 					</div>
 				</div>
 			</>
 		</>
 	)
-}
-function setEmail(email: any) {
-    throw new Error("Function not implemented.")
-}
-
-function setShowModal(arg0: boolean) {
-    throw new Error("Function not implemented.")
 }
 

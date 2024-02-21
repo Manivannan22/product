@@ -1,9 +1,7 @@
-import { Icons } from "@/components/icons"
 import { MainNav } from "@/components/main-nav"
 import { ModeToggle } from "@/components/mode-toggle"
-import { buttonVariants } from "@/components/ui/button"
 import { siteConfig } from "@/config/site"
-import { Link } from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
 import { FiShoppingBag } from "react-icons/fi"
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
 import {
@@ -12,8 +10,15 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { Navigation } from "lucide-react"
 
 export function SiteHeader() {
+	const handleLogout = () => {
+		clearAll()
+		// Navigate("/");
+		console.log("Logout")
+	}
+
 	return (
 		<header className="sticky top-0 z-40 w-full border-b bg-background">
 			<div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
@@ -24,33 +29,6 @@ export function SiteHeader() {
 							<FiShoppingBag className=" mr-4 h-6 w-6" />
 						</Link>
 
-						{/* <Link to={siteConfig.links.github} target="_blank" rel="noreferrer">
-              <div
-                className={buttonVariants({
-                  size: "icon",
-                  variant: "ghost",
-                })}
-              >
-                <Icons.gitHub className="h-5 w-5" />
-                <span className="sr-only">GitHub</span>
-              </div>
-            </Link>
-            <Link
-              to={siteConfig.links.youtube}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <div
-                className={buttonVariants({
-                  size: "icon",
-                  variant: "ghost",
-                })}
-              >
-                <Icons.youtube className="h-5 w-5" />
-                <span className="sr-only">YouTube</span>
-              </div>
-            </Link> */}
-
 						<ModeToggle />
 						<DropdownMenu>
 							<DropdownMenuTrigger asChild>
@@ -60,11 +38,10 @@ export function SiteHeader() {
 										src="https://github.com/shadcn.png"
 										alt="@shadcn"
 									/>
-									{/* <AvatarFallback>CN</AvatarFallback> */}
 								</Avatar>
 							</DropdownMenuTrigger>
 							<DropdownMenuContent align="end">
-								<DropdownMenuItem onClick={() => "light"}>
+								<DropdownMenuItem onClick={() => handleLogout}>
 									Logout
 								</DropdownMenuItem>
 							</DropdownMenuContent>
@@ -80,4 +57,7 @@ export function SiteHeader() {
 			</div>
 		</header>
 	)
+}
+function clearAll() {
+	throw new Error("Function not implemented.")
 }

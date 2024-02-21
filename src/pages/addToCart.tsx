@@ -4,18 +4,19 @@ import { XMarkIcon } from "@heroicons/react/24/outline"
 import _ from "lodash"
 
 const AddToCart = ({ product, open, setOpen, cart, setCart }: any) => {
-  const [notification, setNotification] = useState("")
-   
-  const addToCart = (productToadd: any) => {
-   const isProductInCart = cart.find((item: any) => item._id === productToadd._id);
-   if(isProductInCart) {
-    setNotification ("Product is already add to cart");
-   } else {
-      setCart([...cart, productToadd]);
-      setNotification("Product add to cart")
-   }
-  }
+	const [notification, setNotification] = useState("")
 
+	const _addToCart = (productToadd: any) => {
+		const isProductInCart = cart.find(
+			(item: any) => item._id === productToadd._id,
+		)
+		if (isProductInCart) {
+			setNotification("Product is already add to cart")
+		} else {
+			setCart([...cart, productToadd])
+			setNotification("Product add to cart")
+		}
+	}
 
 	const increaseQuantity = (productId: any, sign: any) => {
 		const updatedCart = cart.map((item: any) => {
@@ -28,27 +29,18 @@ const AddToCart = ({ product, open, setOpen, cart, setCart }: any) => {
 			return item
 		})
 		setCart(updatedCart)
-	};
+	}
 
-  const removeProduct = (productId: any) => {
-   const updatedCart = cart.filter((item: any) => item._id !== productId);
-   setCart(updatedCart);
-   setNotification("Product removed from cart");
-  };
+	const removeProduct = (productId: any) => {
+		const updatedCart = cart.filter((item: any) => item._id !== productId)
+		setCart(updatedCart)
+		setNotification("Product removed from cart")
+	}
 
 	const total = (price: any, qty: any) => {
 		let num = Number(price) * Number(qty)
 		return num
-	};
-
-  // const toatl2=()=>{
-  //   let num = cart.map((item:any)=>{
-  //     let num1 = Number(item?.price) * Number(item?.quantity)      
-  //     return num1
-  //   })
-  //   let num3 = _.sum(num)
-  //   return num3
-  // }
+	}
 
 	return (
 		<Transition.Root show={open} as={Fragment}>
@@ -133,7 +125,6 @@ const AddToCart = ({ product, open, setOpen, cart, setCart }: any) => {
 																		</p>
 																	</div>
 																	<div className="flex flex-1 items-end justify-between text-sm">
-																		{/* <p className="text-gray-500">Qty {product.quantity}</p> */}
 																		<button
 																			type="button"
 																			className=" w-12 font-medium text-red-400 hover:text-red-600"
@@ -157,8 +148,10 @@ const AddToCart = ({ product, open, setOpen, cart, setCart }: any) => {
 																			<button
 																				type="button"
 																				className="font-medium text-red-400 hover:text-red-500"
-																			  onClick={() => removeProduct(product._id)}
-                                      >
+																				onClick={() =>
+																					removeProduct(product._id)
+																				}
+																			>
 																				Remove
 																			</button>
 																		</div>
