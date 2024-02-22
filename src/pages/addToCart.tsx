@@ -127,14 +127,22 @@ const AddToCart = ({ product, open, setOpen, cart, setCart }: any) => {
 																	<div className="flex flex-1 items-end justify-between text-sm">
 																		<button
 																			type="button"
-																			className=" w-12 font-medium text-red-400 hover:text-red-600"
+																			className=" font-medium text-red-400 hover:text-red-600"
 																			onClick={() =>
 																				increaseQuantity(product._id, "-")
 																			}
 																		>
 																			-
 																		</button>
-																		<p className="mx-2">{product.quantity}</p>
+																		<p className="mx-2 text">
+																			<button 
+																			  type="button"
+																			  className=" font-medium text-gray-400 hover:text-gray-600"
+                                                                              
+																			>
+																			{product.quantity}
+																			</button>
+																		</p>
 																		<button
 																			type="button"
 																			className="font-medium text-green-600 hover:text-green-500"
@@ -173,7 +181,7 @@ const AddToCart = ({ product, open, setOpen, cart, setCart }: any) => {
 											</p>
 											<div className="mt-6">
 												<a
-													href="#"
+													href="/"
 													className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
 												>
 													Checkout

@@ -9,7 +9,7 @@ import Cart from '@/assets/cart.png'
 
 const product = {
   name: 'Basic Tee 6-Pack',
-  price: '$192',
+  price: '192',
   href: '#',
   breadcrumbs: [
     { id: 1, name: 'Men', href: '#' },
@@ -93,23 +93,14 @@ export default function ProductDetails() {
     })
   }
   
-  const addToCart = (item:any)=>{
+  const addToCart = async (item:any)=>{
     setCart([...cart,item]),
     setNotification("Product added to cart successfully.")
   } 
 
-  const CalculateTotalAmount = () => {
-    let totalAmount = 0;
-    cart.forEach((product: any) => {
-      totalAmount += product.price;
-    });
-    return totalAmount;
-  }
-
   useEffect(() => {
     handleClick()
   },[])
-
 
   return (
     <div className="bg-white">
@@ -148,7 +139,7 @@ export default function ProductDetails() {
           <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
             <img
               src={productId?.imageSrc}
-              alt={product.images[0].alt}
+              // alt={product.images[0].alt}
               className="h-full w-full object-cover object-center"
             />
           </div>
@@ -156,14 +147,14 @@ export default function ProductDetails() {
             <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
               <img
                 src={productId?.imageSrc}
-                alt={product.images[1].alt}
+                // alt={product.images[1].alt}
                 className="h-full w-full object-cover object-center"
               />
             </div>
             <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
               <img
                 src={product.images[2].src}
-                alt={product.images[2].alt}
+                // alt={product.images[2].alt}
                 className="h-full w-full object-cover object-center"
               />
             </div>
