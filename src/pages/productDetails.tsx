@@ -77,6 +77,7 @@ export default function ProductDetails() {
   const [selectedColor, setSelectedColor] = useState(product.colors[0])
   const [selectedSize, setSelectedSize] = useState(product.sizes[2])
   const [productId, setProductId] = useState<any>([])
+  const [products, setProducts] = useState([])
   const [cart, setCart] = useState<any>([])
   const [notification, setNotification] = useState("")
 
@@ -92,11 +93,28 @@ export default function ProductDetails() {
       setNotification("Failed to fetch product details. Please try again.")
     })
   }
+
+  useEffect (() => {
+   const fetchProducts = async ()=> {
+    try {
+      const response = await axios.get("http://localhost:5000/api/get_all_products");
+      setProducts(response?.data?.products);
+    } catch(err) {
+      setNotification("not defined products!")
+    }
+   };
+   fetchProducts();
+  }, []);
   
   const addToCart = async (item:any)=>{
     setCart([...cart,item]),
-    setNotification("Product added to cart successfully.")
+    setNotification('${poduct.name} add to cart');
   } 
+
+  const addAllToCart = () => {
+    products.forEach((product) => addToCart(product));
+    setNotification('All products added to cart.')
+  }
 
   useEffect(() => {
     handleClick()
@@ -300,6 +318,25 @@ export default function ProductDetails() {
                   </div>
                 </RadioGroup>
               </div>
+              
+              {/* <div>
+      <h1>Products</h1>
+      <div>
+        {products.map((product: any) => (
+          <div key={product.id}>
+            <h2>{product.name}</h2>
+            <p>Price: {product.price}</p>
+            <Button onClick={() => addToCart(product)}>Add to Cart</Button>
+          </div>
+        ))}
+      </div>
+      <Button onClick={addAllToCart}>Add All to Cart</Button>
+      {notification && (
+        <div className="notification">{notification}</div>
+      )}
+      <AddToCart cart={cart} setCart={setCart} />
+    </div> */}
+
                             
               {notification && (
                 <div className='fixed top-0 right-0 mt-4 mr-4 bg-green-500 text-white px-4 py-2 rounded'>
@@ -324,7 +361,6 @@ export default function ProductDetails() {
 							</div>
             </form>
           </div>
-
 
           <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
             {/* Description and details */}
