@@ -6,6 +6,7 @@ import axios from 'axios'
 import { Button } from '@/components/ui/button'
 import AddToCart from './addToCart'
 import Cart from '@/assets/cart.png'
+import { Highlighter } from 'lucide-react'
 
 const product = {
   name: 'Basic Tee 6-Pack',
@@ -94,6 +95,7 @@ export default function ProductDetails() {
     })
   }
 
+
   useEffect (() => {
    const fetchProducts = async ()=> {
     try {
@@ -103,6 +105,7 @@ export default function ProductDetails() {
       setNotification("not defined products!")
     }
    };
+  //  fetchProducts();
    fetchProducts();
   }, []);
   
@@ -119,6 +122,10 @@ export default function ProductDetails() {
   useEffect(() => {
     handleClick()
   },[])
+
+  function CalculateTotalAmount(): import("react").ReactNode {
+    throw new Error('Function not implemented.')
+  }
 
   return (
     <div className="bg-white">
@@ -152,7 +159,6 @@ export default function ProductDetails() {
           </ol>
         </nav>
 
-        
         <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
           <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
             <img
@@ -164,7 +170,7 @@ export default function ProductDetails() {
           <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
             <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
               <img
-                src={productId?.imageSrc}
+                src={productId?.imageSrc} 
                 // alt={product.images[1].alt}
                 className="h-full w-full object-cover object-center"
               />
@@ -215,7 +221,7 @@ export default function ProductDetails() {
                 </div>
                 <p className="sr-only">{2} out of 5 stars</p>
                 <a href={reviews.href} className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                  {3.5} reviews
+                  {3.5} reviews 
                 </a>
               </div>
             </div>
@@ -318,25 +324,6 @@ export default function ProductDetails() {
                   </div>
                 </RadioGroup>
               </div>
-              
-              {/* <div>
-      <h1>Products</h1>
-      <div>
-        {products.map((product: any) => (
-          <div key={product.id}>
-            <h2>{product.name}</h2>
-            <p>Price: {product.price}</p>
-            <Button onClick={() => addToCart(product)}>Add to Cart</Button>
-          </div>
-        ))}
-      </div>
-      <Button onClick={addAllToCart}>Add All to Cart</Button>
-      {notification && (
-        <div className="notification">{notification}</div>
-      )}
-      <AddToCart cart={cart} setCart={setCart} />
-    </div> */}
-
                             
               {notification && (
                 <div className='fixed top-0 right-0 mt-4 mr-4 bg-green-500 text-white px-4 py-2 rounded'>
@@ -377,6 +364,11 @@ export default function ProductDetails() {
 
               <div className="mt-4">
                 <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
+                  {/* {product.highlights.map((highlight) => (
+                    <li key={highlight} className="text-gray-400">
+                      <span className="text-gray-600">{highlight}</span>
+                    </li>
+                  ))} */}
                   {product.highlights.map((highlight) => (
                     <li key={highlight} className="text-gray-400">
                       <span className="text-gray-600">{highlight}</span>
@@ -395,11 +387,11 @@ export default function ProductDetails() {
             </div>
           </div>
         </div>
-        {/* <div className="mt-4 flex justify-center">
+        <div className="mt-4 flex justify-center">
         <p className="text-lg font-semibold">
           Total Amount: ₹{CalculateTotalAmount()}
         </p>
-      </div> */}
+      </div>
       </div>
       <AddToCart open={open} setOpen={setOpen} setCart={setCart} cart={cart}/>
     </div>
