@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import AddToCart from './addToCart'
 import Cart from '@/assets/cart.png'
 import { Highlighter } from 'lucide-react'
+import { toast } from 'sonner'
 
 const product = {
   name: 'Basic Tee 6-Pack',
@@ -95,6 +96,31 @@ export default function ProductDetails() {
     })
   }
 
+  const addToCartApi = async(productId:any) => {
+    try {
+      const data = {  productId };
+      const res = await axios.post(`http://localhost:5000/api/add_To_Cart`, data);
+      console.log(res);
+      return res.data;
+    } catch(err) {
+      console.log(err);
+      throw err;
+    }
+    // await axios
+    // .post(`http://localhost:5000/api/add_To_Cart`, product)
+    // .then((res) => {
+    //   console.log(res);
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    // })
+  }
+
+  const addToCart = async (item:any)=>{
+    setCart([...cart,item]),
+    addToCartApi(item.id);   
+    toast.success(`${item.name} add to cart`);
+  } 
 
   useEffect (() => {
    const fetchProducts = async ()=> {
@@ -105,80 +131,34 @@ export default function ProductDetails() {
       setNotification("not defined products!")
     }
    };
-  //  fetchProducts();
    fetchProducts();
   }, []);
   
-  const addToCart = async (item:any)=>{
-    setCart([...cart,item]),
-    setNotification('${poduct.name} add to cart');
-  } 
-
-  const addAllToCart = () => {
-    products.forEach((product) => addToCart(product));
-    setNotification('All products added to cart.')
-  }
-
   useEffect(() => {
     handleClick()
   },[])
 
-  function CalculateTotalAmount(): import("react").ReactNode {
-    throw new Error('Function not implemented.')
-  }
 
   return (
     <div className="bg-white">
       <div className="pt-6">
-        <nav aria-label="Breadcrumb">
-          <ol role="list" className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-            {product.breadcrumbs.map((breadcrumb) => (
-              <li key={breadcrumb.id}>
-                <div className="flex items-center">
-                  <a href={breadcrumb.href} className="mr-2 text-sm font-medium text-gray-900">
-                    {product.name}
-                  </a>
-                  <svg
-                    width={16}
-                    height={20}
-                    viewBox="0 0 16 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                    className="h-5 w-4 text-gray-300"
-                  >
-                    <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
-                  </svg>
-                </div>
-              </li>
-            ))}
-            <li className="text-sm">
-              <a href={product.href} aria-current="page" className="font-medium text-gray-500 hover:text-gray-600">
-                {product.name}
-              </a>
-            </li>
-          </ol>
-        </nav>
-
         <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
           <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
             <img
               src={productId?.imageSrc}
-              // alt={product.images[0].alt}
               className="h-full w-full object-cover object-center"
             />
           </div>
           <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
             <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
               <img
-                src={productId?.imageSrc} 
-                // alt={product.images[1].alt}
+                src={productId?.imageSrc}
                 className="h-full w-full object-cover object-center"
               />
             </div>
             <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
               <img
                 src={product.images[2].src}
-                // alt={product.images[2].alt}
                 className="h-full w-full object-cover object-center"
               />
             </div>
@@ -201,7 +181,7 @@ export default function ProductDetails() {
           {/* Options */}
           <div className="mt-4 lg:row-span-3 lg:mt-0">
             <h2 className="sr-only">Product information</h2>
-            <p className="text-3xl tracking-tight text-gray-900">₹{product.price}</p>
+            <p className="text-3xl tracking-tight text-gray-900">₹{productId?.price}</p>
 
             {/* Reviews */}
             <div className="mt-6">
@@ -221,7 +201,7 @@ export default function ProductDetails() {
                 </div>
                 <p className="sr-only">{2} out of 5 stars</p>
                 <a href={reviews.href} className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                  {3.5} reviews 
+                  {3.5} reviews
                 </a>
               </div>
             </div>
@@ -364,11 +344,6 @@ export default function ProductDetails() {
 
               <div className="mt-4">
                 <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
-                  {/* {product.highlights.map((highlight) => (
-                    <li key={highlight} className="text-gray-400">
-                      <span className="text-gray-600">{highlight}</span>
-                    </li>
-                  ))} */}
                   {product.highlights.map((highlight) => (
                     <li key={highlight} className="text-gray-400">
                       <span className="text-gray-600">{highlight}</span>
@@ -387,11 +362,7 @@ export default function ProductDetails() {
             </div>
           </div>
         </div>
-        <div className="mt-4 flex justify-center">
-        <p className="text-lg font-semibold">
-          Total Amount: ₹{CalculateTotalAmount()}
-        </p>
-      </div>
+    
       </div>
       <AddToCart open={open} setOpen={setOpen} setCart={setCart} cart={cart}/>
     </div>

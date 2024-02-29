@@ -82,7 +82,7 @@ const AddToCart = ({ product, open, setOpen, cart, setCart }: any) => {
 														className="relative -m-2 p-2 text-gray-400 hover:text-gray-500"
 														onClick={() => setOpen(false)}
 													>
-														<span className="absolute -inset-0.5" />
+													id	<span className="absolute -inset-0.5" />
 														<span className="sr-only">Close panel</span>
 														<XMarkIcon className="h-6 w-6" aria-hidden="true" />
 													</button>
