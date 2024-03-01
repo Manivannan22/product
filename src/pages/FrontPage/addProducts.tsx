@@ -15,7 +15,7 @@ const AddProduct = () => {
 			quantity: "",
 			description: "",
 			category: "",
-			image_upload: "",
+			image_upload: [],
 		},
 		// validationSchema: Yup.object({
 		// 	firstName: Yup.string()
@@ -31,7 +31,7 @@ const AddProduct = () => {
 				.post("http://localhost:5000/api/create_product", values)
 				.then((res) => {
           console.log(res);
-          navigate("/")
+          navigate("/home")
         })
 				.catch((err) => {
           console.log(err);
@@ -116,17 +116,23 @@ const AddProduct = () => {
 					) : null}
 
                     <label>Image Upload</label>
-					<input
-						id="image_upload"
-						name="image_upload"
-						className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-						type="file"
-						onChange={formik.handleChange}
-						onBlur={formik.handleBlur}
-						value={formik.values.image_upload}
+					<ImageUploader
+					    withIcon = {true}
+						buttonText="Choose images"
+						onChange = {(image => formik.setFieldValue('image_upload', image))}
+						imgExtension={['.jpg', '.gif', '.png', '.jpeg']}
+                        maxFileSize={5242880}
+                        withPreview={true}
+						// id="image_upload"
+						// name="image_upload"
+						// className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+						// type="file"
+						// onChange={formik.handleChange}
+						// onBlur={formik.handleBlur}
+						// value={formik.values.image_upload}
 					/>
 
-					<button type="submit" className="  w-16 h-10 mt-8 rounded-lg bg-orange-300 hover:bg-orange-600" >Submit</button>
+					<button type="submit" className="  w-16 h-10 mt-8 rounded-lg bg-orange-300 hover:bg-orange-400" >Submit</button>
 				</form>
 			</div>
 		</div>

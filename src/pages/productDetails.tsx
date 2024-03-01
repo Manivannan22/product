@@ -133,7 +133,7 @@ export default function ProductDetails() {
    };
    fetchProducts();
   }, []);
-  
+
   useEffect(() => {
     handleClick()
   },[])
@@ -318,11 +318,11 @@ export default function ProductDetails() {
               )}       
 
               <div className="mt-4 flex justify-around">
-								<Button type='button' onClick={()=>{addToCart(productId)}} className=" w-80 h-14 bg-orange-400 hover:bg-orange-700">
+								<Button type='button' onClick={()=>{addToCart(productId)}} className=" w-80 h-14 bg-orange-400 hover:bg-orange-500">
 									<img src={Cart} className=" h-5 mr-2" />
                   ADD TO CART
 								</Button>
-								<Button type='reset' onClick={()=>{setOpen(true)}} className="ml-2 w-80 h-14 bg-gray-400 hover:bg-gray-700">
+								<Button type='reset' onClick={()=>{setOpen(true)}} className="ml-2 w-80 h-14 bg-gray-400 hover:bg-gray-600">
 									BUY NOW
 								</Button>
 							</div>

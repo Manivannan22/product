@@ -9,7 +9,6 @@ const HomePage = () => {
   const [products, setProducts] = useState([]);
   // const [rating, setRating] = useState<number>(0);
 
-
   const handleClick = async() => {
     await axios
     .get("http://localhost:5000/api/get_product")

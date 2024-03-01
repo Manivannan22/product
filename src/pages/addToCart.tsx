@@ -42,6 +42,14 @@ const AddToCart = ({ product, open, setOpen, cart, setCart }: any) => {
 		return num
 	}
 
+	// const calculateCartTotal = () => {
+	// 	let total = 0;
+	// 	cart.forEach((item: any) => {
+	// 		total += total(item.price, item.quentity);
+	// 	});
+	// 	return total;
+	// }
+
 	return (
 		<Transition.Root show={open} as={Fragment}>
 			<Dialog as="div" className="relative z-10" onClose={setOpen}>
@@ -82,7 +90,9 @@ const AddToCart = ({ product, open, setOpen, cart, setCart }: any) => {
 														className="relative -m-2 p-2 text-gray-400 hover:text-gray-500"
 														onClick={() => setOpen(false)}
 													>
-													id	<span className="absolute -inset-0.5" />
+														{" "}
+														id
+														<span className="absolute -inset-0.5" />
 														<span className="sr-only">Close panel</span>
 														<XMarkIcon className="h-6 w-6" aria-hidden="true" />
 													</button>
@@ -134,13 +144,12 @@ const AddToCart = ({ product, open, setOpen, cart, setCart }: any) => {
 																		>
 																			-
 																		</button>
-																		<p className="mx-2 text">
-																			<button 
-																			  type="button"
-																			  className=" font-medium text-gray-400 hover:text-gray-600"
-                                                                              
+																		<p className="text mx-2">
+																			<button
+																				type="button"
+																				className=" font-medium text-gray-400 hover:text-gray-600"
 																			>
-																			{product.quantity}
+																				{product.quantity}
 																			</button>
 																		</p>
 																		<button
