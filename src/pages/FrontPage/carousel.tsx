@@ -1,9 +1,48 @@
 import { Link } from "react-router-dom";
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import headphone from "../../assets/image1.jpg";
+import clock from "../../assets/image2.jpg";
+import shoes from "../../assets/image3.jpg"
 
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+ 
 
   export default function ProductDetailsPage({products}:any) {
     return (
       <div className="bg-white">
+        <div className="flex  justify-center ">
+        <div className=" w-full">
+        <Swiper
+      modules={[Navigation, Pagination, Scrollbar, A11y]}
+      spaceBetween={50}
+      slidesPerView={1}
+      navigation
+      autoplay={true}
+      pagination={{ clickable: true }}
+      scrollbar={{ draggable: true }}
+      onSwiper={(swiper) => console.log(swiper)}
+      onSlideChange={() => console.log('slide change')}
+    >
+      <SwiperSlide >
+      <img src={headphone} alt="headphone" className="w-full h-80 flex justify-center" />
+      </SwiperSlide>
+      <SwiperSlide>
+      <img src={clock} alt="clock" className="w-full h-80 flex justify-center" />
+      </SwiperSlide>
+      <SwiperSlide>
+      <img src={shoes} alt="shoes" className="w-full h-80 flex justify-center" />
+      </SwiperSlide>
+      <SwiperSlide>
+        <img src="headphone" alt="headphone" className="w-full h-48 flex justify-center" />
+      </SwiperSlide>
+      
+    </Swiper>
+    </div>
+        </div>
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">Products</h2>
   
@@ -37,7 +76,7 @@ import { Link } from "react-router-dom";
             ))}
           </div>
         </div>
-      </div>
+      </div> 
     )
   }
   
