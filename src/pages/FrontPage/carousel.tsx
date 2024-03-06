@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import headphone from "../../assets/image1.jpg";
 import clock from "../../assets/image2.jpg";
 import shoes from "../../assets/image3.jpg"
-
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -12,40 +11,44 @@ import 'swiper/css/scrollbar';
  
 
   export default function ProductDetailsPage({products}:any) {
+    const categories = {};
+
+    // products.forEach((product: any) => {
+    //   if(!categories[product.category]) {
+    //     categories[product.category]=[];
+    //   }
+    //   categories[product.category].push(product);
+    // });
+
     return (
       <div className="bg-white">
         <div className="flex  justify-center ">
-        <div className=" w-full">
+        <div className=" w-full h-96">
         <Swiper
-      modules={[Navigation, Pagination, Scrollbar, A11y]}
+      modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
       spaceBetween={50}
       slidesPerView={1}
       navigation
-      autoplay={true}
       pagination={{ clickable: true }}
       scrollbar={{ draggable: true }}
+      autoplay={{delay: 3000}}
       onSwiper={(swiper) => console.log(swiper)}
       onSlideChange={() => console.log('slide change')}
     >
       <SwiperSlide >
-      <img src={headphone} alt="headphone" className="w-full h-80 flex justify-center" />
+      <img src={headphone} alt="headphone" className="w-full h-96 flex justify-center" />
       </SwiperSlide>
       <SwiperSlide>
-      <img src={clock} alt="clock" className="w-full h-80 flex justify-center" />
+      <img src={clock} alt="clock" className="w-full h-96 flex justify-center" />
       </SwiperSlide>
       <SwiperSlide>
-      <img src={shoes} alt="shoes" className="w-full h-80 flex justify-center" />
+      <img src={shoes} alt="shoes" className="w-full h-96 flex justify-center" />
       </SwiperSlide>
-      <SwiperSlide>
-        <img src="headphone" alt="headphone" className="w-full h-48 flex justify-center" />
-      </SwiperSlide>
-      
     </Swiper>
     </div>
         </div>
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">Products</h2>
-  
           <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
             {products.map((product:any, index:number) => (
               <Link to={`/${product?._id}`}>              

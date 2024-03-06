@@ -29,18 +29,25 @@ const AddToCart = ({ product, open, setOpen, cart, setCart }: any) => {
 			return item
 		})
 		setCart(updatedCart)
-	}
+	};
 
 	const removeProduct = (productId: any) => {
 		const updatedCart = cart.filter((item: any) => item._id !== productId)
 		setCart(updatedCart)
 		setNotification("Product removed from cart")
-	}
+	};
 
 	const total = (price: any, qty: any) => {
 		let num = Number(price) * Number(qty)
 		return num
-	}
+	};
+
+	// const calculateTotal = () => {
+	// 	return cart.reduce(
+	// 		(total, item) => total + item.price * item.quantity,
+	// 		0
+	// 	);
+	// };
 
 	// const calculateCartTotal = () => {
 	// 	let total = 0;

@@ -198,6 +198,7 @@ export default function ProductDetails() {
                       aria-hidden="true"
                     />
                   ))}
+
                 </div>
                 <p className="sr-only">{2} out of 5 stars</p>
                 <a href={reviews.href} className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
@@ -210,7 +211,6 @@ export default function ProductDetails() {
               {/* Colors */}
               <div>
                 <h3 className="text-sm font-medium text-gray-900">Color</h3>
-
                 <RadioGroup value={selectedColor} onChange={setSelectedColor} className="mt-4">
                   <RadioGroup.Label className="sr-only">Choose a color</RadioGroup.Label>
                   <div className="flex items-center space-x-3">
@@ -305,7 +305,7 @@ export default function ProductDetails() {
                 </RadioGroup>
               </div>
                             
-              {notification && (
+              {/* {notification && (
                 <div className='fixed top-0 right-0 mt-4 mr-4 bg-green-500 text-white px-4 py-2 rounded'>
                    {notification}
                    <button 
@@ -315,7 +315,16 @@ export default function ProductDetails() {
                     Dismiss
                    </button>
                 </div>   
-              )}       
+              )}        */}
+
+              {notification && (
+                <div className='fixed top-0 right-0 mt-4 mr-4 bg-green-500 text-white px--4 py-2 rounded'>
+                {notification}
+                <button onClick={() => setNotification(productId)}>
+                 Dismiss
+                </button>  
+                </div>
+              )}
 
               <div className="mt-4 flex justify-around">
 								<Button type='button' onClick={()=>{addToCart(productId)}} className=" w-80 h-14 bg-orange-400 hover:bg-orange-500">
