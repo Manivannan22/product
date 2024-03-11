@@ -42,12 +42,18 @@ const AddToCart = ({ product, open, setOpen, cart, setCart }: any) => {
 		return num
 	};
 
-	// const calculateTotal = () => {
-	// 	return cart.reduce(
-	// 		(total, item) => total + item.price * item.quantity,
-	// 		0
-	// 	);
-	// };
+	const removeFromCart = (productId: any) => {
+		const updatedCart = cart.filter((item: any) => item._id !== productId)
+		setCart(updatedCart)
+		setNotification("Product removed from cart")
+	};
+
+	const calculateTotal = () => {
+		return cart.reduce(
+			(total: number, item: { price: number; quantity: number }) => total + item.price * item.quantity,
+			0
+		);
+	};
 
 	// const calculateCartTotal = () => {
 	// 	let total = 0;
@@ -117,17 +123,24 @@ const AddToCart = ({ product, open, setOpen, cart, setCart }: any) => {
 													>
 														{cart.map((product: any, index: any) => (
 															<li key={index} className="flex py-6">
+																<div className="flex flex-1 flex-col">
 																<div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
 																	<img
 																		src={product.imageSrc}
 																		alt={"img"}
 																		className="h-full w-full object-cover object-center"
 																	/>
+																	<h3>{product.imageSrc}</h3>
+																	<p>{product.price * product.quantity}</p>
+																</div>
+																<div className="flex items-end justify-between text-sm">
+                                                                <p>Quantity: {product.quantity}</p> 
+																</div>
 																</div>
 
 																<div className="ml-4 flex flex-1 flex-col">
 																	<div>
-																		<div className="flex justify-between text-base font-medium text-gray-900">
+																		{/* <div className="flex justify-between text-base font-medium text-gray-900">
 																			<h3>
 																				<a href={product.href}>
 																					{product.name}
@@ -136,7 +149,7 @@ const AddToCart = ({ product, open, setOpen, cart, setCart }: any) => {
 																			<p className="ml-4">
 																				{total(product.price, product.quantity)}
 																			</p>
-																		</div>
+																		</div> */}
 																		<p className="mt-1 text-sm text-gray-500">
 																			{product.color}
 																		</p>
@@ -190,7 +203,7 @@ const AddToCart = ({ product, open, setOpen, cart, setCart }: any) => {
 
 										<div className="border-t border-gray-200 px-4 py-6 sm:px-6">
 											<div className="flex justify-between text-base font-medium text-gray-900">
-												<p>Subtotal</p>
+												<p>Total: {calculateTotal()}</p>
 											</div>
 											<p className="mt-0.5 text-sm text-gray-500">
 												Shipping and taxes calculated at checkout.

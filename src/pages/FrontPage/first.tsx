@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import './StarRating.css';
 import ProductDetailsPage from "./carousel";
 import axios from "axios";
+import Footerr from "@/components/footer";
 
 
 const HomePage = () => {
@@ -28,6 +29,9 @@ const HomePage = () => {
   return (
     <div style={{width:"100%"}}> 
      <ProductDetailsPage products={products}/>
+     <div style={{height: "40vh"}}>
+     <Footerr />
+     </div>
     </div>
   
   )

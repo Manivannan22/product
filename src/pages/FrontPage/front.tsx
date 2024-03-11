@@ -107,28 +107,6 @@ const Front = () => {
 						{/* <Card className="w-60">  */}
 						<ResizablePanel defaultSize={40}>
 							<div className="flex justify-center">
-								{/* <Carousel
-        opts={{
-        align: "start",
-      }}
-      orientation="vertical"
-      className="w-20 "
-    >
-        <CarouselContent className="mt-16 h-[200px]">
-        {Array.from({ length: 7 }).map((_, index) => (
-          <CarouselItem key={index} className="pt-1 md:basis-1/4">
-              <Card className="">
-                <CardContent className="flex justify-center p-3">
-                  <span className="text-3xl font-semibold">{index + 1}</span>
-                </CardContent>
-              </Card>
-            
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
-      </Carousel> */}
 								<div className="flex justify-center ">
 									<img
 										className="object-cover"

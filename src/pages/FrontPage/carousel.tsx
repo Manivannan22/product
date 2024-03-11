@@ -8,10 +8,8 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
- 
 
   export default function ProductDetailsPage({products}:any) {
-    const categories = {};
 
     // products.forEach((product: any) => {
     //   if(!categories[product.category]) {
@@ -36,6 +34,7 @@ import 'swiper/css/scrollbar';
       onSlideChange={() => console.log('slide change')}
     >
       <SwiperSlide >
+      {/* <h1>Headphone</h1> */}
       <img src={headphone} alt="headphone" className="w-full h-96 flex justify-center" />
       </SwiperSlide>
       <SwiperSlide>
@@ -79,6 +78,7 @@ import 'swiper/css/scrollbar';
             ))}
           </div>
         </div>
+        
       </div> 
     )
   }

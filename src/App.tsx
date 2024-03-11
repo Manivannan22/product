@@ -1,9 +1,6 @@
 import { SiteHeader } from "@/components/site-header"
 import {
-	createBrowserRouter,
-	RouterProvider,
 	Route,
-	Link,
 	Routes,
 } from "react-router-dom"
 import Front from "../src/pages/FrontPage/front"

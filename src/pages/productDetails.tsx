@@ -342,7 +342,6 @@ export default function ProductDetails() {
             {/* Description and details */}
             <div>
               <h3 className="sr-only">Description</h3>
-
               <div className="space-y-6">
                 <p className="text-base text-gray-900">{product.description}</p>
               </div>
