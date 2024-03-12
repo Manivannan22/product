@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState} from "react"
 import { useFormik } from "formik"
 import * as Yup from "yup"
 import axios from "axios"
@@ -38,6 +38,32 @@ const AddProduct = () => {
         })
 		},
 	})
+    const UploadImageForm = () => {
+	  const [image, setImage] = useState(null);
+
+	  const handleImageUpload = (picture: any) => {
+			setImage(picture[0]);
+	  };
+
+	//   const handleFormSubmit = async () => {
+	// 	const formData = new FormData();
+	// 	formData.append('image', image);
+	// 	try {
+    //       const response = await fetch('http://', {
+	// 		method: 'POST',
+    //         body: formData,
+	// 	  });
+	// 	  if(response.ok)  { 
+	// 		console.log('Image Upload Successfully');
+	// 	  } else {
+	// 		console.error('Failed to upload image');
+	// 	  }
+	// 	} catch(error) {
+    //       console.error('Error Uploading image:', error);
+	// 	}
+	//   }
+	};
+
 	return (  
 		<div className="mt-10 flex justify-center">
 			<div className="grid w-full max-w-sm items-center gap-1.5">
@@ -59,7 +85,7 @@ const AddProduct = () => {
 						<div>{formik.errors.name}</div>
 					) : null}
 
-					<label>Price</label>
+					<label>Price</label>            
 					<input
 						id="price"
 						name="price"
@@ -132,7 +158,8 @@ const AddProduct = () => {
 						// value={formik.values.image_upload}
 					/>
 
-					<button type="submit" className="  w-16 h-10 mt-8 rounded-lg bg-orange-300 hover:bg-orange-400" >Submit</button>
+					<button type="submit" className="w-16 h-10 mt-8 rounded-lg bg-orange-300 hover:bg-orange-400" >Submit</button>
+				    {/* <button onClick={handleFormSubmit}> Upload </button>  */}
 				</form>
 			</div>
 		</div>
