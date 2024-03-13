@@ -45,23 +45,23 @@ const AddProduct = () => {
 			setImage(picture[0]);
 	  };
 
-	//   const handleFormSubmit = async () => {
-	// 	const formData = new FormData();
-	// 	formData.append('image', image);
-	// 	try {
-    //       const response = await fetch('http://', {
-	// 		method: 'POST',
-    //         body: formData,
-	// 	  });
-	// 	  if(response.ok)  { 
-	// 		console.log('Image Upload Successfully');
-	// 	  } else {
-	// 		console.error('Failed to upload image');
-	// 	  }
-	// 	} catch(error) {
-    //       console.error('Error Uploading image:', error);
-	// 	}
-	//   }
+	  const handleFormSubmit = async () => {
+		const formData = new FormData();
+		// formData.append('image', image);
+		try {
+          const response = await fetch('http://localhost:5000/api/imageUploadDB', {
+			method: 'POST',
+            body: formData,
+		  });
+		  if(response.ok)  { 
+			console.log('Image Upload Successfully');
+		  } else {
+			console.error('Failed to upload image');
+		  }
+		} catch(error) {
+          console.error('Error Uploading image:', error);
+		}
+	  }
 	};
 
 	return (  
@@ -149,16 +149,9 @@ const AddProduct = () => {
 						imgExtension={['.jpg', '.gif', '.png', '.jpeg']}
                         maxFileSize={5242880}
                         withPreview={true}
-						// id="image_upload"
-						// name="image_upload"
-						// className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-						// type="file"
-						// onChange={formik.handleChange}
-						// onBlur={formik.handleBlur}
-						// value={formik.values.image_upload}
 					/>
 
-					<button type="submit" className="w-16 h-10 mt-8 rounded-lg bg-orange-300 hover:bg-orange-400" >Submit</button>
+					{/* <button type="submit" className="w-16 h-10 mt-8 rounded-lg bg-orange-300 hover:bg-orange-400" >Submit</button> */}
 				    {/* <button onClick={handleFormSubmit}> Upload </button>  */}
 				</form>
 			</div>

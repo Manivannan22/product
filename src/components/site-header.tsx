@@ -32,7 +32,7 @@ export function SiteHeader() {
 						<ModeToggle />
 						<DropdownMenu>
 							<DropdownMenuTrigger asChild>
-								<Avatar>	
+								<Avatar>
 									<AvatarImage
 										className=" ml-4 inline-block h-10 w-10 rounded-full ring-2 ring-white"
 										src="https://github.com/shadcn.png"

@@ -7,14 +7,13 @@ import { FiShoppingCart } from "react-icons/fi"
 function Footerr() {
   return (
     <Footer container>
-      <div className="w-full">
+      <div className="w-full mt-10">
         <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
           <div>
             <Footer.Brand
-              href="FiShoppingCart"
+              href={FiShoppingCart}
               src= "FiShoppingCart"
-            //   src="https://flowbite.com/docs/images/logo.svg"
-              alt=""
+              alt={FiShoppingCart}
               name="E-Com"
             />
           </div>
@@ -43,7 +42,7 @@ function Footerr() {
           </div>
         </div>
         <Footer.Divider className=" mt-4" />
-        <div className="w-full mt-8 sm:flex sm:items-center sm:justify-between">
+        <div className="w-full mt-4 sm:flex sm:items-center sm:justify-between">
           <Footer.Copyright href="#" by="E-Com™" year={2024} />
           <div className=" flex space-x-6 sm:justify-center">
             <Footer.Icon href="#" icon={BsFacebook} />
