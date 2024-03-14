@@ -32,16 +32,30 @@ import 'swiper/css/scrollbar';
       autoplay={{delay: 3000}}
       onSwiper={(swiper) => console.log(swiper)}
       onSlideChange={() => console.log('slide change')}
+      effect="fade"
     >
-      <SwiperSlide >
-      {/* <h1>Headphone</h1> */}
-      <img src={headphone} alt="headphone" className="w-full h-96 flex justify-center" />
-      </SwiperSlide>
       <SwiperSlide>
-      <img src={clock} alt="clock" className="w-full h-96 flex justify-center" />
+      {/* <div className="object-cover"> */}
+      <img src={headphone} alt="headphone" className="w-full h-96 flex justify-center" />
+      <div className="text-start ">
+        <h2 className="text-xl font-bold">Headphones</h2>
+        <p className="text-gray-600">High-quality sound experience</p>
+      </div>
+      {/* </div> */}
+      </SwiperSlide>
+      <SwiperSlide> 
+      <img src={clock} alt="clock" className="w-full h-96 object-cover" />
+      <div className="text-center p-8">
+        <h2 className="text-xl font-bold">Clock</h2>
+        <p className="text-gray-600">Elegant timepiece for your home</p>
+      </div>
       </SwiperSlide>
       <SwiperSlide>
       <img src={shoes} alt="shoes" className="w-full h-96 flex justify-center" />
+      <div className="text-center p-8">
+        <h2 className="text-xl font-bold">Shoes</h2>
+        <p className="text-gray-600">Comfortable and stylish footwear</p>
+      </div>
       </SwiperSlide>
     </Swiper>
     </div>

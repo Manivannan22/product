@@ -148,10 +148,10 @@ const AddProduct = () => {
 						onChange = {(image => formik.setFieldValue('image_upload', image))}
 						imgExtension={['.jpg', '.gif', '.png', '.jpeg']}
                         maxFileSize={5242880}
-                        withPreview={true}
+                        withPreview={true}    
 					/>
 
-					{/* <button type="submit" className="w-16 h-10 mt-8 rounded-lg bg-orange-300 hover:bg-orange-400" >Submit</button> */}
+					<button type="submit" className="w-16 h-10 mt-8 rounded-lg bg-orange-300 hover:bg-orange-400" >Submit</button>
 				    {/* <button onClick={handleFormSubmit}> Upload </button>  */}
 				</form>
 			</div>

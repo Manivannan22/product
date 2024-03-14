@@ -126,10 +126,11 @@ export default function ProductDetails() {
    const fetchProducts = async ()=> {
     try {
       const response = await axios.get("http://localhost:5000/api/get_all_products");
+      // const response = await axios.get("https://fakestoreapi.com/products")
       setProducts(response?.data?.products);
     } catch(err) {
       setNotification("not defined products!")
-    }
+    }   
    };
    fetchProducts();
   }, []);
