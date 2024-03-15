@@ -139,6 +139,13 @@ export default function ProductDetails() {
     handleClick()
   },[])
 
+  const calculateTotalPrice = () => {
+    let totalPrice = 0;
+    cart.forEatch((item: { price: string }) => {
+      totalPrice += parseFloat(item.price);
+    });
+    return totalPrice.toFixed(2);
+  };
 
   return (
     <div className="bg-white">
@@ -374,6 +381,11 @@ export default function ProductDetails() {
     
       </div>
       <AddToCart open={open} setOpen={setOpen} setCart={setCart} cart={cart}/>
+
+      <div className="mt-4 flex justify-between">
+         <p className="text-lg font-semibold">Total:</p>
+         <p className="text-lg font-semibold">₹{calculateTotalPrice()}</p>
+      </div>
     </div>
   )
 }
