@@ -36,40 +36,25 @@ import 'swiper/css/scrollbar';
     >
       <SwiperSlide>
       {/* <div className="object-cover"> */}
-      {/* <img src={headphone} alt="headphone" className="w-full h-96 flex justify-center" />
+      <img src={headphone} alt="Headphones" className="w-full h-96 flex justify-center" />
       <div className="text-start ">
         <h2 className="text-xl font-bold">Headphones</h2>
         <p className="text-gray-600">High-quality sound experience</p>
-      </div> */}
-      <img  src={headphone} alt="Headphone" className="w-full h-96 flex justify-center" />
-      <div className="z-10 text-start">
-       <h2 className="text-xl font-bold">Headphones</h2>
-       <p className="text-gray-600">High-quality sound experience</p>
       </div>
       {/* </div> */}
       </SwiperSlide>
       <SwiperSlide> 
-      {/* <img src={clock} alt="clock" className="w-full h-96 object-cover" />
+      <img src={clock} alt="Clock" className="w-full h-96 object-cover" />
       <div className="text-center p-8">
         <h2 className="text-xl font-bold">Clock</h2>
         <p className="text-gray-600">Elegant timepiece for your home</p>
-      </div> */}
-      <img src={clock} alt="Clock" className="w-full h-96 flex justify-center"/>
-      <div className="text-center">
-      <h2 className="text-xl font-bold">Clock</h2>
-      <p>Elegent timepiece for your home</p>
       </div>
       </SwiperSlide>  
       <SwiperSlide>
-      {/* <img src={shoes} alt="shoes" className="w-full h-96 flex justify-center" />
+      <img src={shoes} alt="Shoes" className="w-full h-96 flex justify-center" />
       <div className="text-center p-8">
         <h2 className="text-xl font-bold">Shoes</h2>
         <p className="text-gray-600">Comfortable and stylish footwear</p>
-      </div> */}
-      <img src={shoes} alt="Shoes" className="w-full h-96 flex justify-center"/>
-      <div className="text-center">
-       <h2 className="text-xl font-bold">Shoes</h2>
-       <p>Comfortable and stylish footwear</p>
       </div>
       </SwiperSlide>
     </Swiper>

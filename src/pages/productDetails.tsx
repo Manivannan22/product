@@ -8,6 +8,7 @@ import AddToCart from './addToCart'
 import Cart from '@/assets/cart.png'
 import { Highlighter } from 'lucide-react'
 import { toast } from 'sonner'
+import { error } from 'console'
 
 const product = {
   name: 'Basic Tee 6-Pack',
@@ -179,6 +180,19 @@ export default function ProductDetails() {
             />
           </div>
         </div>
+
+        {/* <div className='container' >
+         <h1>Product List</h1>
+         <div className="grid grid-cols-3 gap-4">
+         {products.map((product) => (
+          <div key={product.id} className="border p-4">
+           <img src={product.image} alt={product.title} className="mb-2" />
+           <h2 className="text-lg font-semibold">{product.title}</h2>
+            <p className="text-gray-500">{product.price}</p> 
+          </div>
+         ))}
+         </div>
+        </div> */}
 
         {/* Product info */}
         <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">

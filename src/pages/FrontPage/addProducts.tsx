@@ -57,7 +57,7 @@ const AddProduct = () => {
 			console.log('Image Upload Successfully');
 		  } else {
 			console.error('Failed to upload image');
-		  }
+		  }	
 		} catch(error) {
           console.error('Error Uploading image:', error);
 		}
