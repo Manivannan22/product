@@ -8,7 +8,7 @@ import AddToCart from './addToCart'
 import Cart from '@/assets/cart.png'
 import { Highlighter } from 'lucide-react'
 import { toast } from 'sonner'
-import { error } from 'console'
+import { error, log } from 'console'
 
 const product = {
   name: 'Basic Tee 6-Pack',
@@ -126,8 +126,8 @@ export default function ProductDetails() {
   useEffect (() => {
    const fetchProducts = async ()=> {
     try {
-      const response = await axios.get("http://localhost:5000/api/get_all_products");
-      // const response = await axios.get("https://fakestoreapi.com/products")
+      // const response = await axios.get("http://localhost:5000/api/get_all_products");
+      const response = await axios.get("https://fakestoreapi.com/products")
       setProducts(response?.data?.products);
     } catch(err) {
       setNotification("not defined products!")
@@ -140,13 +140,14 @@ export default function ProductDetails() {
     handleClick()
   },[])
 
-  const calculateTotalPrice = () => {
-    let totalPrice = 0;
-    cart.forEatch((item: { price: string }) => {
-      totalPrice += parseFloat(item.price);
-    });
-    return totalPrice.toFixed(2);
-  };
+  // const calculateTotalPrice = () => {
+  //   let totalPrice = 0;
+  //   cart.forEatch((item: { price: string }) => {
+  //     totalPrice += parseFloat(item.price);
+  //   });
+  //   return totalPrice.toFixed(2);
+  // };
+console.log(productId);
 
   return (
     <div className="bg-white">
@@ -327,7 +328,7 @@ export default function ProductDetails() {
                 </RadioGroup>
               </div>
                             
-              {/* {notification && (
+              {notification && (
                 <div className='fixed top-0 right-0 mt-4 mr-4 bg-green-500 text-white px-4 py-2 rounded'>
                    {notification}
                    <button 
@@ -337,16 +338,16 @@ export default function ProductDetails() {
                     Dismiss
                    </button>
                 </div>   
-              )}        */}
+              )}       
 
-              {notification && (
+              {/* {notification && (
                 <div className='fixed top-0 right-0 mt-4 mr-4 bg-green-500 text-white px--4 py-2 rounded'>
                 {notification}
                 <button onClick={() => setNotification(productId)}>
                  Dismiss
                 </button>  
                 </div>
-              )}
+              )} */}
 
               <div className="mt-4 flex justify-around">
 								<Button type='button' onClick={()=>{addToCart(productId)}} className=" w-80 h-14 bg-orange-400 hover:bg-orange-500">
@@ -395,11 +396,11 @@ export default function ProductDetails() {
     
       </div>
       <AddToCart open={open} setOpen={setOpen} setCart={setCart} cart={cart}/>
-
+{/* 
       <div className="mt-4 flex justify-between">
          <p className="text-lg font-semibold">Total:</p>
          <p className="text-lg font-semibold">₹{calculateTotalPrice()}</p>
-      </div>
+      </div> */}
     </div>
   )
 }

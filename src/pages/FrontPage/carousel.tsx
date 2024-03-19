@@ -20,7 +20,7 @@ import 'swiper/css/scrollbar';
 
     return (
       <div className="bg-white">
-        <div className="flex  justify-center ">
+        <div className="flex  justify-center">
         <div className=" w-full h-96">
         <Swiper
       modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
@@ -96,7 +96,7 @@ import 'swiper/css/scrollbar';
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                   <img
                     src={product.imageSrc}
-                    alt={product.name}
+                      alt={product.name}
                     className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                   />
                 </div>
