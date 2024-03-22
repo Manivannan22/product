@@ -38,11 +38,11 @@ import 'swiper/css/scrollbar';
       {/* <div className="object-cover"> */}
       <img src={headphone} alt="Headphones" className="w-full h-96 flex justify-center" />
       <div className="text-start ">
-        <h2 className="text-xl font-bold">Headphones</h2>
+        <h2 className="text-xl font-bold">Headphones</h2> 
         <p className="text-gray-600">High-quality sound experience</p>
       </div>
       {/* </div> */}
-      </SwiperSlide>
+      </SwiperSlide> 
       <SwiperSlide> 
       <img src={clock} alt="Clock" className="w-full h-96 object-cover" />
       <div className="text-center p-8">
@@ -63,33 +63,6 @@ import 'swiper/css/scrollbar';
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">Products</h2>
           <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {/* <div className="group relative">
-            <Link to="/headphones">
-              <img src={headphone} alt="Headphone" className="w-full h-60 object-cover" />
-              <div className="text-center mt-4">
-                <h3 className="text-lg font-semibold">Headphones</h3>
-                <p className="text-gray-600">High-quality sound experience</p>
-              </div>
-            </Link>
-          </div>
-          <div className="group relative">
-            <Link to="/clock">
-              <img src={clock} alt="Clock" className="w-full h-60 object-cover" />
-              <div className="text-center mt-4">
-                <h3 className="text-lg font-semibold">Clock</h3>
-                <p className="text-gray-600">Elegant timepiece for your home</p>
-              </div>
-            </Link>
-          </div>
-          <div className="group relative">
-            <Link to="/shoes">
-              <img src={shoes} alt="Shoes" className="w-full h-60 object-cover" />
-              <div className="text-center mt-4">
-                <h3 className="text-lg font-semibold">Shoes</h3>
-                <p className="text-gray-600">Comfortable and stylish footwear</p>
-              </div>
-            </Link>
-          </div> */}
             {products.map((product:any, index:number) => (
               <Link to={`/${product?._id}`}>              
               <div key={index} className="group relative">
@@ -110,7 +83,7 @@ import 'swiper/css/scrollbar';
                     </h3>
                     <p className="mt-1 text-sm text-gray-500">{product.description}</p>
                   </div>
-                  <p className="text-sm font-medium text-gray-900">₹ {product.price}</p>
+                  <p className="text-sm font-medium text-gray-900">₹{product.price}</p>
                   <p className="text-sm font-medium text-gray-900">{product.category}</p>
                 </div>
               </div>

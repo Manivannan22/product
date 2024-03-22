@@ -76,46 +76,62 @@ function classNames(...classes: string[]) {
 export default function ProductDetails() {
   const params = useParams()
   const [open, setOpen] = useState(false)
-  console.log(params.id);
+  // console.log(params.id);
   const [selectedColor, setSelectedColor] = useState(product.colors[0])
   const [selectedSize, setSelectedSize] = useState(product.sizes[2])
   const [productId, setProductId] = useState<any>([])
   const [products, setProducts] = useState([])
   const [cart, setCart] = useState<any>([])
   const [notification, setNotification] = useState("")
+  
+  useEffect(() => {
+    const handleClick = async() => {
+      try {
+        const res = await axios.get(`http://localhost:5000/api/get_singleproduct?id=${params.id}`);
+        setProductId(res?.data?.data)
+      } catch (err) {
+        console.log(err);
+        setNotification('Failed to fetch product details. Please try again.');
+      }
+    };
+    handleClick();
+  }, [params.id]);
 
-  const handleClick = async() => {
-    await axios
-    .get(`http://localhost:5000/api/get_singleproduct?id=${params.id}`)
-    .then((res) => {
-      console.log(res);
-      setProductId(res?.data?.data);     
-    })
-    .catch((err) => {
-      console.log(err);
-      setNotification("Failed to fetch product details. Please try again.")
-    })
-  }
-
-  const addToCartApi = async(productId:any) => {
+  // const handleClick = async() => {
+  //   await axios
+  //   .get(`http://localhost:5000/api/get_singleproduct?id=${params.id}`)
+  //   .then((res) => {
+  //     console.log(res);
+  //     setProductId(res?.data?.data);     
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //     setNotification("Failed to fetch product details. Please try again.")
+  //   })
+  // }
+  const addToCartApi = async (item: any) => {
     try {
-      const data = {  productId };
-      const res = await axios.post(`http://localhost:5000/api/add_To_Cart`, data);
+      setCart([...cart, item]);
+      const res = await axios.post(`http://localhost:5000/api/add_To_Cart`, item);
       console.log(res);
-      return res.data;
-    } catch(err) {
+      toast.success(`${item.name} added to cart`);
+    } catch (err) {
       console.log(err);
-      throw err;
+      toast.error(`Faild to add ${item.name} to cart`)
     }
-    // await axios
-    // .post(`http://localhost:5000/api/add_To_Cart`, product)
-    // .then((res) => {
-    //   console.log(res);
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // })
-  }
+  } 
+
+  // const addToCartApi = async(productId:any) => {
+  //   try {
+  //     const data = {  productId };
+  //     const res = await axios.post(`http://localhost:5000/api/add_To_Cart`, data);
+  //     console.log(res);
+  //     return res.data;
+  //   } catch(err) {
+  //     console.log(err);
+  //     throw err;
+  //   }
+  // }
 
   const addToCart = async (item:any)=>{
     setCart([...cart,item]),
@@ -136,17 +152,10 @@ export default function ProductDetails() {
    fetchProducts();
   }, []);
 
-  useEffect(() => {
-    handleClick()
-  },[])
+  // useEffect(() => {
+  //   handleClick()
+  // },[])
 
-  // const calculateTotalPrice = () => {
-  //   let totalPrice = 0;
-  //   cart.forEatch((item: { price: string }) => {
-  //     totalPrice += parseFloat(item.price);
-  //   });
-  //   return totalPrice.toFixed(2);
-  // };
 console.log(productId);
 
   return (
@@ -182,19 +191,6 @@ console.log(productId);
           </div>
         </div>
 
-        {/* <div className='container' >
-         <h1>Product List</h1>
-         <div className="grid grid-cols-3 gap-4">
-         {products.map((product) => (
-          <div key={product.id} className="border p-4">
-           <img src={product.image} alt={product.title} className="mb-2" />
-           <h2 className="text-lg font-semibold">{product.title}</h2>
-            <p className="text-gray-500">{product.price}</p> 
-          </div>
-         ))}
-         </div>
-        </div> */}
-
         {/* Product info */}
         <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
           <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
@@ -207,7 +203,7 @@ console.log(productId);
             <p className="text-3xl tracking-tight text-gray-900">₹{productId?.price}</p>
 
             {/* Reviews */}
-            <div className="mt-6">
+            <div className="mt-6">      
               <h3 className="sr-only">Reviews</h3>
               <div className="flex items-center">
                 <div className="flex items-center">
@@ -320,7 +316,7 @@ console.log(productId);
                                 </svg>
                               </span>
                             )}
-                          </>
+                          </> 
                         )}
                       </RadioGroup.Option>
                     ))}
@@ -334,36 +330,39 @@ console.log(productId);
                    <button 
                     onClick={() => setNotification(productId)}
                     className='ml-2 text-sm font-medium hover:underline'
-                   >
+                   >  
                     Dismiss
                    </button>
                 </div>   
               )}       
-
-              {/* {notification && (
-                <div className='fixed top-0 right-0 mt-4 mr-4 bg-green-500 text-white px--4 py-2 rounded'>
-                {notification}
-                <button onClick={() => setNotification(productId)}>
-                 Dismiss
-                </button>  
-                </div>
-              )} */}
 
               <div className="mt-4 flex justify-around">
 								<Button type='button' onClick={()=>{addToCart(productId)}} className=" w-80 h-14 bg-orange-400 hover:bg-orange-500">
 									<img src={Cart} className=" h-5 mr-2" />
                   ADD TO CART
 								</Button>
-								<Button type='reset' onClick={()=>{setOpen(true)}} className="ml-2 w-80 h-14 bg-gray-400 hover:bg-gray-600">
+								 <Button type='reset' onClick={()=>{setOpen(true)}} className="ml-2 w-80 h-14 bg-gray-400 hover:bg-gray-600">
 									BUY NOW
-								</Button>
-							</div>
+								</Button>  
+							</div>  
             </form>
           </div>
 
+          {notification && (
+             <div className="fixed top-0 right-0 mt-4 mr-4 bg-green-500 text-white px-4 py-2 rounded">
+             {notification}
+             <button 
+             onClick={() => setNotification('')}
+             className="ml-2 text-sm font-medium hover:underline"
+             >     
+             Dismiss
+             </button>
+             </div>
+          )}    
+
           <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
             {/* Description and details */}
-            <div>
+            <div> 
               <h3 className="sr-only">Description</h3>
               <div className="space-y-6">
                 <p className="text-base text-gray-900">{product.description}</p>
@@ -396,11 +395,6 @@ console.log(productId);
     
       </div>
       <AddToCart open={open} setOpen={setOpen} setCart={setCart} cart={cart}/>
-{/* 
-      <div className="mt-4 flex justify-between">
-         <p className="text-lg font-semibold">Total:</p>
-         <p className="text-lg font-semibold">₹{calculateTotalPrice()}</p>
-      </div> */}
     </div>
   )
 }
