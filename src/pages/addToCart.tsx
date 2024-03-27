@@ -37,11 +37,6 @@ const AddToCart = ({ product, open, setOpen, cart, setCart }: any) => {
 		setNotification("Product removed from cart")
 	};
 
-	const total = (price: any, qty: any) => {
-		let num = Number(price) * Number(qty)
-		return num
-	};
-
 	const removeFromCart = (productId: any) => {
 		const updatedCart = cart.filter((item: any) => item._id !== productId)
 		setCart(updatedCart)
@@ -54,14 +49,6 @@ const AddToCart = ({ product, open, setOpen, cart, setCart }: any) => {
 			0
 		);
 	};
-
-	// const calculateCartTotal = () => {
-	// 	let total = 0;
-	// 	cart.forEach((item: any) => {
-	// 		total += total(item.price, item.quentity);
-	// 	});
-	// 	return total;
-	// }
 
 	return (
 		<Transition.Root show={open} as={Fragment}>
@@ -108,7 +95,7 @@ const AddToCart = ({ product, open, setOpen, cart, setCart }: any) => {
 														<span className="absolute -inset-0.5" />
 														<span className="sr-only">Close panel</span>
 														<XMarkIcon className="h-6 w-6" aria-hidden="true" />
-													</button>
+													</button>	
 												</div>
 											</div>
 

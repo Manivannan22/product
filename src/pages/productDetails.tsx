@@ -75,7 +75,7 @@ function classNames(...classes: string[]) {
 
 export default function ProductDetails() {
   const params = useParams()
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false) 
   // console.log(params.id);
   const [selectedColor, setSelectedColor] = useState(product.colors[0])
   const [selectedSize, setSelectedSize] = useState(product.sizes[2])
@@ -133,7 +133,7 @@ export default function ProductDetails() {
   //   }
   // }
 
-  const addToCart = async (item:any)=>{
+  const addToCart = async (item:any)=>{   
     setCart([...cart,item]),
     addToCartApi(item.id);   
     toast.success(`${item.name} add to cart`);
@@ -290,7 +290,7 @@ console.log(productId);
                         }
                       >
                         {({ active, checked }) => (
-                          <>
+                          <>  
                             <RadioGroup.Label as="span">{size.name}</RadioGroup.Label>
                             {size.inStock ? (
                               <span
