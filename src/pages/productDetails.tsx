@@ -133,33 +133,37 @@ export default function ProductDetails() {
   //   }
   // }
 
-  const addToCart = async (item:any)=>{   
-    setCart([...cart,item]),
-    addToCartApi(item.id);   
-    toast.success(`${item.name} add to cart`);
-  } 
-
   useEffect (() => {
    const fetchProducts = async ()=> {
     try {
-      // const response = await axios.get("http://localhost:5000/api/get_all_products");
-      const response = await axios.get("https://fakestoreapi.com/products")
-      setProducts(response?.data?.products);
+      const response = await axios.get("http://localhost:5000/api/get_singleproduct?id=${params.id}");
+      // const response = await axios.get("https://fakestoreapi.com/products")
+      setProducts(response?.data?.data);
     } catch(err) {
       setNotification("not defined products!")
     }   
    };
    fetchProducts();
-  }, []);
+  }, [params.id]);
 
-  // useEffect(() => {
-  //   handleClick()
-  // },[])
+  const addToCart = async () => {
+    if (product) {
+      setCart([...cart, product]);
+      setTotalPrice(prevPrice => prevPrice + parseFloat(product.price));
+      toast.success(`${product.name} added to cart`);
+    }
+  }
+ 
+  // const addToCart = async (item:any)=>{   
+  //   setCart([...cart,item]),
+  //   addToCartApi(item.id);   
+  //   toast.success(`${item.name} add to cart`);
+  // } 
 
 console.log(productId);
 
   return (
-    <div className="bg-white">
+    <div className="bg-white"> 
       <div className="pt-6">
         <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
           <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
@@ -337,8 +341,8 @@ console.log(productId);
               )}       
 
               <div className="mt-4 flex justify-around">
-								<Button type='button' onClick={()=>{addToCart(productId)}} className=" w-80 h-14 bg-orange-400 hover:bg-orange-500">
-									<img src={Cart} className=" h-5 mr-2" />
+								<Button type='button' onClick={addToCart} className=" w-80 h-14 bg-orange-400 hover:bg-orange-500">
+									<img src={Cart} className=" h-5 mr-2" alt="Add to Cart"/>
                   ADD TO CART
 								</Button>
 								 <Button type='reset' onClick={()=>{setOpen(true)}} className="ml-2 w-80 h-14 bg-gray-400 hover:bg-gray-600">
@@ -371,7 +375,6 @@ console.log(productId);
 
             <div className="mt-10">
               <h3 className="text-sm font-medium text-gray-900">Highlights</h3>
-
               <div className="mt-4">
                 <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
                   {product.highlights.map((highlight) => (
@@ -398,3 +401,7 @@ console.log(productId);
     </div>
   )
 }
+function setTotalPrice(arg0: (prevPrice: any) => any) {
+  throw new Error('Function not implemented.')
+}
+
